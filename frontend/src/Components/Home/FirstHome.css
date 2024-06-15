@@ -64,24 +64,23 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Adjust this to control the height */
+    height: 100vh; 
   }
   
   .HomeDiv1, .HomeDiv2, .HomDiv3 {
-    width: 300px; /* Adjust width as needed */
+    width: 300px; 
     padding: 50px;
-    background-color: #7cbddb; /* Initial background color */
+    background-color: #7cbddb; 
     margin: 10px;
     text-align: center;
-    font-size: 50px;
+    font-size: 30px;
     border-radius: 5px;
     color: rgb(27, 92, 46);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease; /* Smooth transition on hover */
+    transition: background-color 0.3s ease;
   }
   
   .HomeDiv1:hover, .HomeDiv2:hover, .HomDiv3:hover {
-    background-color: #4397e6; /* Slightly darker color on hover */
+    background-color: #4397e6; 
     cursor: pointer;
   }
   

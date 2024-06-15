@@ -1,21 +1,22 @@
 import React from 'react';
-import {link,useNavigate} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 const Homes = () => {
 
-  const Navigate = useNavigate();
-    const Adminblockentry = (e) => {
-        e.preventDefault();
-        Navigate("/adminhome");
-    }
+
   return (
     <div className='HomeDiv'>
-      <div onClick={Adminblockentry} className='HomeDiv1'>Admin
-
+      <Link to="/adminlogin" className='link'>
+      <div  className='HomeDiv1'>Admin
       </div>
+      </Link>
+      <Link to="/studentlogin" className='link'>
       <div className='HomeDiv2'>Student</div>
+      </Link>
+      <Link to="/facultylogin" className='link'>
       <div className='HomDiv3'>Faculty</div>
+      </Link>
     </div>
   )
 }
