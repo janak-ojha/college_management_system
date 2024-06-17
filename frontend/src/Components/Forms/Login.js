@@ -8,6 +8,7 @@ import Students from "../../Assets/Student.jpg";
 import Facultys from "../../Assets/Faculty.jpeg";
 import Admins from "../../Assets/Admin.jpg";
 
+
 const StyledLink = styled(Link)`
   margin-top: 9px;
   text-decoration: none;
@@ -128,7 +129,7 @@ const Login = ({ role }) => {
                                     Don't have an account
                                 </Grid>
                                 <Grid item sx={{ml:2}}>
-                                    <StyledLink to="registerAdmin">
+                                    <StyledLink to="/registerAdmin">
                                         Sign up 
                                     </StyledLink>
 

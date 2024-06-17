@@ -2,8 +2,8 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import FirstHome from './Components/Home/FirstHome';
 import Homes from './Components/Home/Homes';
-
 import Login from './Components/Forms/Login';
+import Signup from './Components/Forms/Signup';
 
 
 
@@ -18,9 +18,7 @@ function App() {
       <Route path='/adminlogin' element={<Login role={"Admin"}/>}/>
       <Route path='/studentlogin' element={<Login role={"Student"}/>}/>
       <Route path='/Facultylogin' element={<Login role={"Faculty"}/>}/>
-      
-      
-      
+      <Route path='/registerAdmin' element={<Signup />} />
      </Routes>
     </div>
   );
