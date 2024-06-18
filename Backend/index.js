@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 const cors =require("cors");
 const mongoose =require("mongoose");
 const app =express();
-const port = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000
 
 
 dotenv.config();
@@ -17,5 +17,11 @@ mongoose
 })
 .then(console.log("Connected to Mongodb"))
 .catch((err)=> console.log("not connected to  network",err));
+
+const authRoute = require ("./Routes/Auth")
+
+app.use("/api/auth",authRoute);
+
+app.listen(PORT);
 
 
