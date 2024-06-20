@@ -15,9 +15,9 @@ router.post("/registerAdmin",async(req,res) =>{
         let admin = new Admin({
             username,
             collegename,
-            password,
             email,
             role,
+            password: hashedpass,
             profilepp:
             profilepp || "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg",
         });
@@ -29,11 +29,11 @@ router.post("/registerAdmin",async(req,res) =>{
             {
                 res.send({message:"Email already Exist"});
             }
-            else if(collegeExist)
+        else if(collegeExist)
                 {
                     res.send({message:"college name already exist"});
                 }
-            else{
+        else{
                 admin = await admin.save();
                 res.status(200).json({
                     _id: admin._id,
@@ -41,7 +41,6 @@ router.post("/registerAdmin",async(req,res) =>{
                     collegename: admin.collegename,
                     email: admin.email,
                     role: admin.role,
-                    password: admin.password,
                     profilepp: admin.profilepp,
                     token: TokenGenerate(admin._id),
                 });

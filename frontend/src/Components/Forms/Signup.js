@@ -1,39 +1,78 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './signup.css';
 import { Avatar, IconButton } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
-import {Link} from 'react-router-dom'
+import {  CircularProgress } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { registerUser } from '../../Redux/userRelated/userHandle';
+import { useDispatch,useSelector} from 'react-redux';
 
 
 
 const Signup = () => {
     const [username,setUsername]= useState("");
-    const [collagename,setCollagename]= useState("");
+    const [collegename,setCollegename]= useState("");
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const [profilepp,setProfilepp] = useState("");
     const [message,setMessage] = useState("");
+    const Navigate = useNavigate();
+    const dispatch = useDispatch();
+    const {status,currentUser,response,error,currentRole,loading } =useSelector(state => state.user);
+   
 
-    const UploadImage =async(e) =>{
-        const file = e.target.value
-        const base64 = await convertToBase64(file)
-        setProfilepp(base64)
+
+    useEffect(() =>{
+      if(status === 'success'){
+        Navigate("/adminLogin");
+      }
+      else if(status === "failed"){
+        console.log("failed");
+        setMessage(response);
+        setTimeout(() => setMessage(""),5000);  
+      }
+      else if(status === "error"){
+        console.log("error");
+        setMessage("server is busy try again later");
+        setTimeout(() => setMessage(""),5000);
+      }
+    },[status,currentUser,currentRole,Navigate,error,response]);
+  
+    // Function to handle file upload and convert to base64
+    const UploadImage = async (e) => {
+      const file = e.target.files[0];
+      if (file) {
+          try {
+              const base64 = await convertToBase64(file);
+              setProfilepp(base64);
+          } catch (error) {
+              console.error("Error converting file to base64:", error);
+          }
+      }
+  };
+
+  // Function to convert file to base64
+  const convertToBase64 = (file) => {
+      return new Promise((resolve, reject) => {
+          const filereader = new FileReader();
+          filereader.readAsDataURL(file);
+          filereader.onload = () => {
+              resolve(filereader.result);
+          };
+          filereader.onerror = (error) => {
+              reject(error);
+          };
+      });
+  };
+  
+    const role = "Admin";
+    const fields = {username,collegename,email,role,password,profilepp};
+
+    const handleRegister = async(e) =>{
+      e.preventDefault();
+      console.log("Fields to be submitted:", fields); 
+      dispatch(registerUser(fields));
     }
-
-    const convertToBase64 = async(file) => {
-        const filereader =new FileReader();
-        filereader.readAsDataURL(file);
-        
-        return new Promise((resolve,reject) =>  {
-            filereader.onload= () => {
-                resolve(filereader.result);
-            };
-            filereader.onerror = (error) =>{
-                reject(error);
-            };
-        });
-
-    };
 
 
     
@@ -42,15 +81,15 @@ const Signup = () => {
 
     <div className='signupContainer'>
       <div className='registerTitle' style={{fontFamily:"sans-serif",fontSize:"55px",marginTop:"20px",}}>Register</div>
-      <form className='registerForm' style={{display:"flex" ,flexDirection:"column",alignItems:"center",marginTop:"20px"}}>
+      <form onSubmit={handleRegister} className='registerForm' style={{display:"flex" ,flexDirection:"column",alignItems:"center",marginTop:"20px"}}>
             <label className='labelsign' style={{ marginRight:"12%"}}>Username</label>
             <input
                className='input_text'
                type='text'
                placeholder='Enter your name'
-               required
                value={username}
                onChange={(e) => setUsername(e.target.value)}
+               required
             />  
             <label className='labelsign'  style={{marginTop:"10px", marginRight:'10%'}}>College Name</label>
             <input
@@ -58,8 +97,8 @@ const Signup = () => {
                 type='text'
                 placeholder='Enter your college name'
                 required
-                value={collagename}
-                onChange={(e) => setCollagename(e.target.value)}
+                value={collegename}
+                onChange={(e) => setCollegename(e.target.value)}
                 />
             <label className='labelsign'  style={{marginTop:"10px",marginRight:"15%"}}>Email</label>
             <input
@@ -74,7 +113,7 @@ const Signup = () => {
             <input
                 className='input_text'
                 type='password'
-                placeholder='Enter your password'
+                placeholder='Enter your password' 
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -99,16 +138,12 @@ const Signup = () => {
             </Avatar>
           </IconButton>
           </label>
-          {message && <div style={{color:"red"}}>{message}</div>}
           </div>
-          <Link to="/adminLogin" className='link'>
-          <button className='buttonRegister' type='onsubmit' >register
-           
-          </button>
-          </Link> 
-        
+          {message && <div style={{color:"red"}}>{message}</div>}
+          <button className='buttonRegister' type='submit' disabled={loading}>
+                        {loading ? <CircularProgress size={24} /> : 'Register'}
+            </button>
       </form>
-
     </div>
   );
 }
