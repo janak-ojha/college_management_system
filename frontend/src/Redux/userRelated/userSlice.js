@@ -6,6 +6,7 @@ const initialState = {
     loading:false,
     currentUser: JSON.parse(localStorage.getItem("user")) || null,
     currentRole: (JSON.parse(localStorage.getItem("user")) || {}).role || null,
+    deleteComponent: false,
     error: null,
     response: null,
     };
@@ -41,6 +42,11 @@ const userSlice = createSlice({
             state.loading =false;
             state.error = action.payload;
         },
+        getcanceldeletedcomponent: (state) =>{
+            state.deleteComponent =false;
+            state.response = null;
+            state.status ="idle";
+        },
 
     },
 });
@@ -50,8 +56,8 @@ export const {
     authSuccess,
     authFailed,
     authError,
-    authSuccessGetMessage
-
+    authSuccessGetMessage,
+    getcanceldeletedcomponent
 } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;

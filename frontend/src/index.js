@@ -8,12 +8,17 @@ import App from './App';
 import './index.css';
 import redux from './Redux/redux';
 
+
+
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <Router>
     <Provider store={redux}>
-      <Router>
+      
         <App />
-      </Router>
+      
     </Provider>
+    </Router>
   </React.StrictMode>
 );

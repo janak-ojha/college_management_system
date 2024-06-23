@@ -1,9 +1,10 @@
-import { current } from "@reduxjs/toolkit";
+
 import {
     authRequest,
     authSuccess,
     authFailed,
     authError,
+    getcanceldeletedcomponent,
     authSuccessGetMessage
 } from "./userSlice";
 
@@ -17,7 +18,7 @@ export const registerUser = (fields,currentUser) => async(dispatch) => {
             body: JSON.stringify(fields),
             headers:{
                 "Content-Type":"application/json",
-                Authorization:`Bearer ${currentUser?.token}`
+                Authorization:`Bearer ${currentUser?.token}`,
             },
         });
         result = await result.json();
@@ -57,3 +58,10 @@ export const loginUser = (fields,role) =>async(dispatch) => {
         dispatch(authError(error));
     }
 } ;
+
+//to comfirm delete component;
+export const cancelDelete= () =>
+    (dispatch) =>{
+        dispatch(getcanceldeletedcomponent());
+
+    }

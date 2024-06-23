@@ -3,7 +3,7 @@ import './signup.css';
 import { Avatar, IconButton } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
 import {  CircularProgress } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate } from 'react-router-dom';
 import { registerUser } from '../../Redux/userRelated/userHandle';
 import { useDispatch,useSelector} from 'react-redux';
 
@@ -23,7 +23,7 @@ const Signup = () => {
 
 
     useEffect(() =>{
-      if(status === 'success'){
+      if(status === "success"){
         Navigate("/adminLogin");
       }
       else if(status === "failed"){
@@ -141,7 +141,9 @@ const Signup = () => {
           </div>
           {message && <div style={{color:"red"}}>{message}</div>}
           <button className='buttonRegister' type='submit' disabled={loading}>
+      
                         {loading ? <CircularProgress size={24} /> : 'Register'}
+              
             </button>
       </form>
     </div>
