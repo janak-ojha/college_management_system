@@ -13,12 +13,12 @@ import redux from './Redux/redux';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Router>
+    
     <Provider store={redux}>
       
         <App />
       
     </Provider>
-    </Router>
+    
   </React.StrictMode>
 );
