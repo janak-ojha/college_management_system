@@ -1,10 +1,31 @@
 import React, { useState } from 'react'
-import { Box, CssBaseline, Divider, IconButton, Toolbar, Typography,List, ListItemButton, ListItemIcon} from "@mui/material";
+import { Box, CssBaseline, Divider, IconButton, Toolbar, Typography,List, ListItemButton, ListItemIcon, ListItemText, ListSubheader} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu"
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import HomeIcon from "@mui/icons-material/Home";
+import PostAddIcon from "@mui/icons-material/PostAdd";
+import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutlined";
+import SupervisorAccountOutlinedIcon from "@mui/icons-material/SupervisorAccountOutlined";
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import {Link,useLocation} from "react-router-dom";
 import { styled, Drawer as MuiDrawer , AppBar as MuiAppBar } from "@mui/material";
+import { Routes,Route } from 'react-router-dom';
+import AdminHome from '../AdminHome/AdminHome';
+import AddCourse from './AddCourse';
+import AddStudent from './AddStudent.js';
+import AddTeacher from './AddTeacher.js';
+import ShowStudent from './ShowStudent.js';
+import ShowTeacher from './ShowTeacher.js';
+import ShowCourses from './ShowCourses.Js';
+import Help from './Help.js';
+import AdminProfile from './AdminProfile.js';
+import AdminNotice from './AdminNotice.js';
+
 
 
 
@@ -12,7 +33,7 @@ import { styled, Drawer as MuiDrawer , AppBar as MuiAppBar } from "@mui/material
 const AdminDrawer = () => {
     const location = useLocation()
     const [open ,setOpen] = useState(false);
-    const drawerWidth = 245;
+    const drawerWidth = 240;
     const toggleDrawer =() =>{
         setOpen(!open);
     };
@@ -31,9 +52,18 @@ const AdminDrawer = () => {
             display:'flex',
             alignItems:'center',
             justifyContent:'flex-end',
-            px:[1]
+            px:[1],
 
-        }
+        },
+        boxStyled:{
+          backgroundColor:(theme) =>
+            theme.palette.mode === "light"
+             ? theme.palette.grey[100]
+             : theme.palette.grey[900],
+            flexGrow:1,
+            height:"100vh",
+            overflow: "auto", 
+        },
 
     }
 
@@ -67,8 +97,9 @@ const AdminDrawer = () => {
                 duration:theme.transitions.duration.enteringScreen,
             }),
         boxSizing:"borderbox",
+        overflowX:"hidden",
         ...(!open && {
-            oveflowX:"hidden",
+            overflowX:"hidden",
             transition:theme.transitions.create("width",{
                 easing:theme.transitions.easing.sharp,
                 duration:theme.transitions.duration.leavingScreen,
@@ -86,9 +117,8 @@ const AdminDrawer = () => {
     <>
     <Box sx={{display:'flex'}}>
      <CssBaseline/>
-
       <AppBar open={open} position="absolute">
-       <Toolbar sx={{pr: "25px"}}>
+       <Toolbar sx={{pr: "24px"}}>
         <IconButton
            color='inherit'
            edge="start"
@@ -130,7 +160,7 @@ const AdminDrawer = () => {
               open={open}
             >
               <React.Fragment>
-                <ListItemButton component={Link} to= "/">
+                <ListItemButton component={Link} to= "/adminhome">
                   <ListItemIcon>
                     <HomeIcon
                       color={
@@ -141,11 +171,147 @@ const AdminDrawer = () => {
                       }
                     />
                   </ListItemIcon>  
+                  <ListItemText primary="Home"/>
+                </ListItemButton>
+                <ListItemButton component={Link} to="/addcourse">
+                  <ListItemIcon>
+                    <PostAddIcon
+                      style={{fontWeight:"bolder",fontSize:"23px"}}
+                      color={
+                        location.pathname.startsWith("/addcourse")
+                        ? "primary"
+                        : "inherit"
+                      }
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary="add course"/>
+                </ListItemButton>
+                <ListItemButton component={Link} to ="/addstudent">
+                  <ListItemIcon>
+                    <PersonAddAltIcon
+                       style={{fontWeight:"bolder" ,fontSize:"23px"}}
+                       color={
+                        location.pathname.startsWith("/addstudent")
+                        ? "primary"
+                        : "inherit"
+                       }
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary="add Student"/>
+                </ListItemButton>
+                <ListItemButton component={Link} to ="/addteacher">
+                <ListItemIcon>
+                  <GroupAddIcon
+                  style={{fontWeight:"bolder",fontSize:"23px"}}
+                  color={
+                    location.pathname.startsWith("/addteacher")
+                    ? "primary"
+                    : "inherit"
+                  }
+                  />
+                </ListItemIcon>
+                <ListItemText primary="add teacher"/>
+                </ListItemButton>
+                <ListItemButton component={Link} to ="/showstudent">
+                  <ListItemIcon>
+                    <PersonOutlineIcon
+                    style={{fontWeight:"bolder", fontSize:"23px"}}
+                    color={
+                      location.pathname.startsWith("/showstudent")
+                      ? "primary"
+                      : 'inherit'
+                    }
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary="Students"/>
+                </ListItemButton>
+                <ListItemButton component={Link} to ="/showteacher">
+                  <ListItemIcon>
+                    <SupervisorAccountOutlinedIcon
+                      style={{fontWeight:'bolder', fontSize:"23px"}}
+                      color={
+                        location.pathname.startsWith("/showteacher")
+                        ? "primary"
+                        : 'inherit'
+                      }  
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary="Teachers"/>
+                </ListItemButton>
+                <ListItemButton component={Link} to="/adminnotice">
+                   <ListItemIcon>
+                    <NoteAltIcon
+                     style={{fontWeight:"bolder", fontSize:"23px"}}
+                     color ={
+                      location.pathname.startsWith("/adminnotice")
+                      ? "primary"
+                      : "inherit"
+                     }
+                    />
+                   </ListItemIcon>
+                   <ListItemText primary="Notice"/>
+                </ListItemButton>
+              </React.Fragment>
+              <Divider sx={{my:1}}/>
+              <React.Fragment>
+                <ListSubheader component="div" inset>
+                  User
+                </ListSubheader>
+                <ListItemButton component={Link} to="/adminprofile">
+                  <ListItemIcon>
+                    <AccountCircleOutlinedIcon
+                       color={
+                        location.pathname.startsWith("/adminprofile")
+                        ? "primary"
+                        : "outlined"
+                       }
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary="profile"/>
+                </ListItemButton>
+                <ListItemButton component={Link} to="/adminhelp">
+                  <ListItemIcon>
+                    <HelpOutlineIcon
+                     color={
+                      location.pathname.startsWith("/adminhelp")
+                      ? "primary"
+                      : "inherit"
+                    }
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary="Help"/>
+                </ListItemButton>
+                <ListItemButton component={Link} to="/adminlogout">
+                  <ListItemIcon>
+                    <ExitToAppIcon
+                     color={
+                      location.pathname.startsWith("/adminlogout")
+                      ? 'primary'
+                      : "inherit"
+                     }
+                     />
+                  </ListItemIcon>
+                  <ListItemText primary="Logout"/>
                 </ListItemButton>
               </React.Fragment>
             </Drawer>
         </List>
       </Drawer>
+      <Box component="main" sx={styles.boxStyled}>
+        <Toolbar/>
+        <Routes>
+          <Route path='/adminHome' element={<AdminHome/>}/>
+          <Route path='/addcourse' element={<AddCourse/>}/>
+          <Route path='/addstudent' element={<AddStudent/>}/>
+          <Route path='/addteacher' element={<AddTeacher/>}/>
+          <Route path='/showstudent' element={<ShowStudent/>} />
+          <Route path='showteacher' element={<ShowTeacher/>} />
+          <Route path='showcourse' element={<ShowCourses/>} />
+          <Route path='adminhelp' element={<Help/>} />
+          <Route path='adminprofile' element={<AdminProfile/>} />
+          <Route path='adminnotice' element={<AdminNotice/> } />
+        </Routes>
+      </Box>
 
     </Box>
     </>
