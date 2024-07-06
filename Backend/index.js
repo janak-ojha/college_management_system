@@ -18,9 +18,11 @@ mongoose
 .then(console.log("Connected to Mongodb"))
 .catch((err)=> console.log("not connected to  network",err));
 
-const authRoute = require ("./Routes/Auth")
+const authRoute = require ("./Routes/Auth");
+const course = require("./Routes/Admin/Course");
 
 app.use("/api/auth",authRoute);
+app.use("/api/courses",course);
 
 app.listen(PORT);
 

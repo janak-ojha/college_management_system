@@ -47,6 +47,10 @@ const userSlice = createSlice({
             state.response = null;
             state.status ="idle";
         },
+        stuffAdded:(state) =>{
+            state.status = "added";
+            state.loading = false;
+        },
 
     },
 });
@@ -57,7 +61,8 @@ export const {
     authFailed,
     authError,
     authSuccessGetMessage,
-    getcanceldeletedcomponent
+    getcanceldeletedcomponent,
+    stuffAdded
 } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;

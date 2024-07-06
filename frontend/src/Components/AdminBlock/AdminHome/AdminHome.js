@@ -5,7 +5,10 @@ import Paper from '@mui/material/Paper';
 import styled from 'styled-components';
 import Classes_img from "../../../Assets/classes_img.jpg";
 import Teachers from "../../../Assets/Faculty.jpeg";
+import Fees from "../../../Assets/Fees.png";
+import Students from "../../../Assets/Student.jpg";
 import './AdminHome.css';
+import ShowNotice from '../../Toast/ShowNotice';
 const AdminHome = () => {
   return (
     <>
@@ -20,8 +23,25 @@ const AdminHome = () => {
         <Grid item xs={12} md={3} lg={3}>
           <StyledPaper>
             <Image src={Teachers} alt='Teachers'/>
-            <Title>Total Teachers</Title>
+            <Title>Total Faculties</Title>
           </StyledPaper>
+        </Grid>
+        <Grid item xs={12} md={3} lg={3}>
+          <StyledPaper>
+            <Image src={Students} alt='Students'/>
+            <Title>Total Students</Title>
+          </StyledPaper>
+        </Grid>
+        <Grid item xs={12} md={3} lg={3}>
+          <StyledPaper>
+            <Image src={Fees} alt="Fees"/>
+            <Title>Fees collections</Title>
+          </StyledPaper>
+        </Grid>
+        <Grid item xs={12} md={12} lg={12}>
+          <Paper sx={{p:2 ,display:"flex" ,flexDirection:"column"}}>
+            <ShowNotice/>
+          </Paper>
         </Grid>
       </Grid>
     </Container>

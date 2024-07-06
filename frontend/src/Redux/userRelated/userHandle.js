@@ -5,6 +5,7 @@ import {
     authFailed,
     authError,
     getcanceldeletedcomponent,
+    stuffAdded,
     authSuccessGetMessage
 } from "./userSlice";
 
@@ -58,6 +59,34 @@ export const loginUser = (fields,role) =>async(dispatch) => {
         dispatch(authError(error));
     }
 } ;
+
+//Add course
+export const addCourse = (fields,currentUser) => async(dispatch) =>{
+   dispatch(authRequest());
+   console.log(fields,currentUser);
+   try{
+    let result = await fetch(`http://localhost:5000/api/courses/addcourse`,{
+        method:"post",
+        body:JSON.stringify(fields),
+        headers:{   
+            "Content-Type":"application/json",
+            Authorization:`Bearer ${currentUser?.token}`,
+        },
+     
+    });
+    result = await result.json();
+    console.log(result)
+    if(result.course){
+        dispatch(stuffAdded());
+    }else{
+        dispatch(authFailed(result.message));
+    }
+   }catch(error)
+   {
+    dispatch(authError(error));
+   }
+   
+};
 
 //to comfirm delete component;
 export const cancelDelete= () =>
