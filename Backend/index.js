@@ -19,7 +19,7 @@ mongoose
 .catch((err)=> console.log("not connected to  network",err));
 
 const authRoute = require ("./Routes/Auth");
-const course = require("./Routes/Admin/Course");
+const course = require("./Routes/Admin/courses");
 
 app.use("/api/auth",authRoute);
 app.use("/api/courses",course);

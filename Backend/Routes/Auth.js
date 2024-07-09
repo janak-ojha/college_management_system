@@ -84,3 +84,9 @@ router.post("/loginAdmin",async(req,res)=>{
 
 module.exports = router;
 
+router.post("/registerStudent",jwtProject,async(req,res) =>{
+    try{
+        const salt = await bcrypt.genSalt
+    }
+})
+

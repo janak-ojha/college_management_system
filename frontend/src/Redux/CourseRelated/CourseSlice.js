@@ -1,0 +1,49 @@
+import {createSlice} from "@reduxjs/toolkit";
+
+const initialState={
+    courseDetails:[],
+    courseList:[],
+    loading:false,
+    error:null,
+    response:null
+}
+
+const courseSlice = createSlice({
+    name:"course",
+    initialState,
+    reducers:{
+        getRequest: (state) =>{
+            state.loading = true;
+        },
+        getSuccess:(state,action) =>{
+            state.courseList = action.payload;
+            state.loading=false;
+            state.response=null;
+            state.error = null;
+        },
+        getFailed:(state,action) =>{
+            state.loading=false;
+            state.response=action.payload;
+            state.error=null;
+        },
+        getError:(state,action) =>{
+            state.loading = false;
+            state.response=null;
+            state.error=action.payload;
+        },
+        getSuccesC:(state,action)=>{
+            state.loading= false;
+            state.courseList=action.payload;
+            state.error = null;
+            state.response=null;
+        },
+        getEmpty:(state)=>{
+            state.loading=false;
+            state.courseList=[];
+        }
+    }
+})
+
+export const {getRequest,getSuccess,getFailed,getError,getSuccesC,getEmpty} = courseSlice.actions;
+
+export const courseReducer = courseSlice.reducer;

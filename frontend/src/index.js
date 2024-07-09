@@ -8,17 +8,24 @@ import App from './App';
 import './index.css';
 import redux from './Redux/redux';
 
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+<Provider store={redux}>
+  <App />
+</Provider>
+  );
 
 
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+
+// ReactDOM.createRoot(document.getElementById('root')).render(
+//   <React.StrictMode>
     
-    <Provider store={redux}>
+//     <Provider store={redux}>
       
-        <App />
+//         <App />
       
-    </Provider>
+//     </Provider>
     
-  </React.StrictMode>
-);
+//   </React.StrictMode>
+// );
