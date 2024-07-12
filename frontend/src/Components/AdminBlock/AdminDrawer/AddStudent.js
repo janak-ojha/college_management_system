@@ -19,7 +19,7 @@ const AddStudent = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const role = "Student"
+  const role = "Student";
 
 
 
@@ -68,13 +68,13 @@ const AddStudent = () => {
   }, [dispatch, currentUser]);  
 
   React.useEffect(() =>{
-    if(status === "added" || response === "Roll Number already exists" || response === "Student with this email already exist"){
+    if(status === "added" || response === "Roll Number already exist" || response === "Student with this email id exist"){
       const timeout = setTimeout(() => {
         dispatch(cancelDelete())
       }, 1500);
       return() =>clearTimeout(timeout);
     }
-  },[status,response])
+  },[status,response,dispatch]);
 
   return (
     <div className='addStudent' style={{ marginTop: "65px" }}>
@@ -210,7 +210,7 @@ const AddStudent = () => {
           </button>
           <div className='courseDetail'>
             {status === "added"?<AddedSuccessfully/>:""}
-            {(response === "Roll Number already exists"|| response === "Student with this email id exist")?<p style={{color:"red"}}>{response}</p>:""}
+            {(response === "Roll Number already exist"|| response === "Student with this email id exist")?<p style={{color:"red"}}>{response}</p>:""}
 
           </div>
         </form>

@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Container, CssBaseline, Box, Typography, TextField, Button } from '@mui/material';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+
+
 import { useDispatch, useSelector } from 'react-redux';
 import { addCourse, cancelDelete } from '../../../Redux/userRelated/userHandle';
-import AddedSuccessfully from '../../Toast/AddedSuccesfully';
+import AddedSuccessfu from "../../Toast/AddedSuccesfully"
 
 const defaultTheme = createTheme();
 
 const CourseSignIN = () => {
   const dispatch = useDispatch();
   const { currentUser, status, response } = useSelector((state) => state.user);
-  const [open, setOpen] = useState(false);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -26,25 +31,18 @@ const CourseSignIN = () => {
 
   useEffect(() => {
     if (status === "added" || response === "Course already exists") {
-      setOpen(true);
       const timeout = setTimeout(() => {
         dispatch(cancelDelete());
-        setOpen(false);
       }, 1500);
       return () => clearTimeout(timeout);
     }
   }, [status, response, dispatch]);
 
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpen(false);
-  };
+
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
+      <Container style={{borderRadius:"10px"}} component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
@@ -116,11 +114,8 @@ const CourseSignIN = () => {
               Create Course
             </Button>
           </Box>
-          <AddedSuccessfully 
-            open={open} 
-            handleClose={handleClose} 
-            message={status === "added" ? "Added successfully" : response} 
-          />
+          {status === "added"? <AddedSuccessfu/>:""}
+          {response === "Course already exists"?<p style={{color:"red"}}>{response}</p>:""}
         </Box>
       </Container>
     </ThemeProvider>

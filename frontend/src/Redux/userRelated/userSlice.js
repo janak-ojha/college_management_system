@@ -9,6 +9,9 @@ const initialState = {
     deleteComponent: false,
     error: null,
     response: null,
+    studentsList: [],
+    teachersList: [],
+
     };
 
 const userSlice = createSlice({
@@ -42,15 +45,30 @@ const userSlice = createSlice({
             state.loading =false;
             state.error = action.payload;
         },
+        authEmpty:(state,action) =>{
+            state.loading= false;
+            state.teachersList = action.payload;
+            state.studentsList = action.payload; 
+        },
         getcanceldeletedcomponent: (state) =>{
             state.deleteComponent =false;
             state.response = null;
             state.status ="idle";
         },
+        getdeletedcomponent:(state) =>{
+            state.deleteComponent = true;
+
+        },
         stuffAdded:(state) =>{
             state.status = "added";
             state.loading = false;
         },
+        getSuccess: (state, action) => {
+            state.loading = false;
+            state.studentsList = action.payload;
+            state.error = null;
+            state.response = null;
+          },
 
     },
 });
@@ -62,7 +80,10 @@ export const {
     authError,
     authSuccessGetMessage,
     getcanceldeletedcomponent,
-    stuffAdded
+    getdeletedcomponent,
+    stuffAdded,
+    authEmpty,
+    getSuccess,
 } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;

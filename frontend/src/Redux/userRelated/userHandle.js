@@ -6,7 +6,11 @@ import {
     authError,
     getcanceldeletedcomponent,
     stuffAdded,
-    authSuccessGetMessage
+    authSuccessGetMessage,
+    getdeletedcomponent,
+    authEmpty,
+    getSuccess
+
 } from "./userSlice";
 
 export const registerUser = (fields,currentUser) => async(dispatch) => {
@@ -84,9 +88,38 @@ export const addCourse = (fields, currentUser) => async (dispatch) => {
     }
 };
 
-//to comfirm delete component;
+//show Students
+export const ShowStudentsList = (currentUser)=> async(dispatch) =>{
+  dispatch(authRequest());
+  try{
+        let result = await fetch(`http://localhost:5000/api/students/getstudents`,{
+            method:'get',
+            headers:{
+                Authorization: `Bearer ${currentUser?.token}`,
+            },
+        });
+       
+        result = await result.json();
+        if(result[0]){
+            dispatch(getSuccess(result))
+        }else{
+            dispatch(authEmpty());
+        }
+  }
+  catch(err)
+  {
+    dispatch(authError(err));
+  }
+};
+
+//to cancel delete component;
 export const cancelDelete= () =>
     (dispatch) =>{
         dispatch(getcanceldeletedcomponent());
 
-    }
+    };
+
+//  ro confirm delte component
+export const setDeletedComponents = () =>(dispatch) =>{
+    dispatch(getdeletedcomponent());
+} ; 

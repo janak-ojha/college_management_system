@@ -1,15 +1,10 @@
-// AddedSuccessfully.js
-import React from 'react';
-import { Snackbar, Alert } from '@mui/material';
+import * as React from 'react';
+import Alert from '@mui/material/Alert';
 
-const AddedSuccessfully = ({ open, handleClose, message }) => {
+export default function ColorAlerts() {
   return (
-    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-      <Alert onClose={handleClose} severity="success" sx={{ width: '100%',  alignItems:"center",color:"red"}}>
-        {message}
-      </Alert>
-    </Snackbar>
+    <Alert severity="success" color="info">
+      Added Sucessfully.
+    </Alert>
   );
-};
-
-export default AddedSuccessfully;
+}

@@ -4,6 +4,8 @@ const bcrypt =require("bcrypt");
 const TokenGenerate =require("./TokenGenerate");
 const {jwtProject} = require("../Middleware/authMiddleware");
 const jwt = require("jsonwebtoken");
+const Student = require("../Model/Student");
+const Teacher = require("../Model/Teacher");
 
 //authorization for admin
 router.post("/registerAdmin",async(req,res) =>{
@@ -84,9 +86,67 @@ router.post("/loginAdmin",async(req,res)=>{
 
 module.exports = router;
 
+//auth for student
+
 router.post("/registerStudent",jwtProject,async(req,res) =>{
     try{
-        const salt = await bcrypt.genSalt
+        const salt = await bcrypt.genSalt(10);
+        const hassPass = await bcrypt.hash(req.body.password,salt);
+        const student = new Student({
+            ...req.body,
+            collegename: req.user.id,
+            password: hassPass,
+        });
+
+        const existingStudentByRollNum = await Student.findOne({
+            rollno: req.body.rollno,
+            collegename:req.user.id,
+        });
+
+        const existingStudentByEmail = await Student.findOne({
+            email: req.body.email,
+        });
+
+        if(existingStudentByRollNum){
+            res.send({message:"Roll Number already exist"});
+        }else if(existingStudentByEmail){
+             res.send({message:"Student with this email id exist"});
+        }else{
+            let result = await student.save();
+            res.send(result);
+        }
+    }catch(error)
+    {
+        res.status(500).json(error);
     }
-})
+});
+
+// auth for teacher
+router.post("/registerTeacher",jwtProject,async(req,res) =>{
+    try{
+        const salt = await bcrypt.genSalt(10);
+        const hashedpass = await bcrypt.hash(req.body.password,salt)
+        const teacher  = new Teacher({
+            ...req.body,
+            collegename: req.user.id,
+            password: hashedpass,
+        });
+
+        const existingTeacherByEmail = await Teacher.findOne({
+                email:req.body.email,
+        });
+        if(existingTeacherByEmail)
+        {
+            res.send({message:"Teacher with same email already exist"});
+        }
+        else{
+            let result = await teacher.save();
+            result.password = undefined;
+            res.send(result);
+        }
+    } catch(err)
+    {
+        res.status(500).json(err);
+    }
+});
 

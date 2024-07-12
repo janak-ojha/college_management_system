@@ -44,7 +44,7 @@ const AdminDrawer = () => {
         },
         hideDrawer:{
             display:"flex",
-            "@media(max-width:600px":{
+            "@media(max-width:600px)":{
                 display:'none'
             }
         },
@@ -88,7 +88,7 @@ const AdminDrawer = () => {
     const Drawer = styled(MuiDrawer,{
         shouldForwardProp: (prop) => prop !== "open",
     })(({theme , open}) =>({
-        " & .MuiDrawer-paper":{
+        "& .MuiDrawer-paper":{
             position:"relative",
             whiteSpace:"nowrap",
             width:drawerWidth,
@@ -96,7 +96,7 @@ const AdminDrawer = () => {
                 easing:theme.transitions.easing.sharp,
                 duration:theme.transitions.duration.enteringScreen,
             }),
-        boxSizing:"borderbox",
+        boxSizing:"border-box",
         overflowX:"hidden",
         ...(!open && {
             overflowX:"hidden",
