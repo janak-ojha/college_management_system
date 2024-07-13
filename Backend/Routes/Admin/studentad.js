@@ -38,5 +38,16 @@ router.put("/deleteOne",jwtProject,async(req,res) =>{
     }
 });
 
+//student of perticular course qithout using id
+
+router.post("/singlecoursestudentlist",jwtProject,async(req,res)=>{
+    try{
+        let{course,branch,year,semester,section,collegename} = req.body;
+        semester = semester.toString();
+        console.log(course,branch,year,semester,section,collegename);
+        if(collegename)
+    }
+})
+
 module.exports = router;
 

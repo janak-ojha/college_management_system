@@ -9,7 +9,9 @@ import {
     authSuccessGetMessage,
     getdeletedcomponent,
     authEmpty,
-    getSuccess
+    getSuccess,
+    getSuccessS,
+    getSuccessT,
 
 } from "./userSlice";
 
@@ -110,6 +112,66 @@ export const ShowStudentsList = (currentUser)=> async(dispatch) =>{
   {
     dispatch(authError(err));
   }
+};
+
+//delete all
+
+export const deleteAll = (currentUser,role) => async(dispatch) =>{
+    dispatch(authRequest());
+    try{
+        let result = await fetch(`http://localhost:5000/api/${role}/deleteAll`,{
+            method:"put",
+            headers:{
+                Authorization: `Bearer ${currentUser?.token}`,
+            },
+        });
+        result = await result.json();
+        if(result[0]){
+            if(role === "teachers"){
+                dispatch(getSuccessT(result));
+            }else if(role === "students"){
+                dispatch(getSuccessT(result));
+            }
+        }else{
+            if(role === "teachers"){
+                dispatch(getSuccessT([]));
+            }else if(role === "students"){
+                dispatch(getSuccessS([]))
+            }
+        }
+    }catch(error){
+         dispatch(authError(error));
+    }
+}
+
+//deleteone
+export const deleteOne = (currentUser,role,selectedId) => async(dispatch) =>{
+    dispatch(authRequest());
+    try{
+        const requestBody = {selectedId};
+        let result = await fetch(`http://localhost:5000/api/${role}/deleteOne`,{
+            method:"put",
+            body:JSON.stringify(requestBody),
+            headers:{
+                "Content-Type":"application/json",
+                Authorization:`Bearer ${currentUser?.token}`,
+            },
+        });
+        result = await result.json();
+        if(result[0])
+        {
+            if(role === "teachers"){
+                dispatch(getSuccessT(result));
+            }else if(role === "students"){
+                dispatch(getSuccessS(result));
+            }
+        }else{
+            dispatch(authEmpty());
+        }
+    }catch(error)
+    {
+        dispatch(authError(error));
+    }
 };
 
 //to cancel delete component;

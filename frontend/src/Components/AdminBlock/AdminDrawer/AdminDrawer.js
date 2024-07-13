@@ -25,6 +25,8 @@ import ShowCourses from './ShowCourses.Js';
 import Help from './Help.js';
 import AdminProfile from './AdminProfile.js';
 import AdminNotice from './AdminNotice.js';
+import ChooseCourse from './ChooseCourse.js';
+import PerticularCourseStudent from "./PerticularCourseStudent.js";
 
 
 
@@ -310,6 +312,10 @@ const AdminDrawer = () => {
           <Route path='adminhelp' element={<Help/>} />
           <Route path='adminprofile' element={<AdminProfile/>} />
           <Route path='adminnotice' element={<AdminNotice/> } />
+          <Route path='/chooseCourse/:role' element={<ChooseCourse/>}></Route>
+          <Route path="/chooseaddteacher/:Id" element={<AddTeacher />} />
+          <Route path="/chooseaddstudent/:Id" element={<AddStudent />} />
+          <Route path="/perticularcoursestudent/:Id" element={<PerticularCourseStudent/>}/>
         </Routes>
       </Box>
 

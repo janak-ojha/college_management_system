@@ -2,7 +2,7 @@ import React from 'react'
 import { SpeedDial, SpeedDialAction,styled } from '@mui/material'
 import TuneIcon from "@mui/icons-material/Tune";
 
-const SpeeddDial = ({actions}) => {
+const SpeedDialTemplate = ({actions}) => {
   return (
     <CustomSpeedDial
       ariaLabel = "SpeedDial playground example"
@@ -23,7 +23,7 @@ const SpeeddDial = ({actions}) => {
   )
 }
 
-export default SpeeddDial
+export default SpeedDialTemplate;
 
 const CustomSpeedDial = styled(SpeedDial)`
 

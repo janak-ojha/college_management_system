@@ -65,7 +65,7 @@ const AddTeacher = () => {
     dispatch(totalCourses(currentUser))
   } ,[dispatch, currentUser]);
 
-  console.log(courseList);
+
 
   return (
     <div className='addStudent' style={{marginTop:'70px'}}>

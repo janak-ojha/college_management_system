@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Table, TableHead, TableRow, TableCell, TableBody, Button, TableContainer } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { ShowStudentsList,setDeletedComponents } from '../../../Redux/userRelated/userHandle';
+import { ShowStudentsList, setDeletedComponents } from '../../../Redux/userRelated/userHandle';
 import { useNavigate } from 'react-router-dom';
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt';
-import {tableCellClasses} from '@mui/material/TableCell';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import { tableCellClasses } from '@mui/material/TableCell';
 import Paper from '@mui/material/Paper';
 import PlayGroundSpeedDial from "../../Toast/SpeeddDial";
+import DeleteConfirm from '../../Toast/DeleteConfirm';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -35,9 +37,6 @@ const ShowStudent = () => {
   const [selectedId, setSelectedId] = useState("");
   const role = "students";
 
-
-
-
   const groupedData = Array.from(
     new Set(
       studentsList?.map(
@@ -52,30 +51,27 @@ const ShowStudent = () => {
     );
     const noOfStudents = matchingItems.length;
   
-  
     return {
       ...matchingItems[0],
       noOfStudents,
     };
-    
   });
- 
 
   useEffect(() => {
     dispatch(ShowStudentsList(currentUser));
     if (deleteComponent === false) {
       setSelectedId("");
     }
-  }, [deleteComponent,dispatch,currentUser]);
+  }, [deleteComponent, dispatch, currentUser]);
 
   const actions = [
     {
       icon: <PersonAddAlt1Icon color="primary" />,
       name: "Add New Student",
-      action: () => navigate(`/Choose/Course/${role}`)
+      action: () => navigate(`/ChooseCourse/${role}`)
     },
     {
-      icon: <PersonAddAlt1Icon color="error" />,
+      icon: <PersonRemoveIcon color="error" />,
       name: 'Delete all student',
       action: () => deleteHandler()
     }
@@ -86,52 +82,59 @@ const ShowStudent = () => {
   };
 
   const viewHandler = (e, id) => {
-    navigate(`/perticularcoursestudents/${id}`);
+    navigate(`/perticularcoursestudent/${id}`);
     e.preventDefault();
   };
 
   return (
     <>
-    {!loading ?<>
-    {!deleteComponent  && <TableContainer component={Paper}>
-      <Table stickyHeader aria-label="sticky table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Course</StyledTableCell>
-            <StyledTableCell align='right'>Branch</StyledTableCell>
-            <StyledTableCell align='right'>Year&nbsp;(yrs)</StyledTableCell>
-            <StyledTableCell align='right'>Semester&nbsp;(sem)</StyledTableCell>
-            <StyledTableCell align='right'>Section&nbsp;(sec)</StyledTableCell>
-            <StyledTableCell align='right'>No.of.Students&nbsp;(num)</StyledTableCell>
-            <StyledTableCell align='right'>Action&nbsp;(Ac)</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {groupedData?.map((student) => (
-            <StyledTableRow key={student?._id || student.course + student.branch + student.year + student.semester + student.section}>
-              <StyledTableCell component="th" scope='row'>{student?.course}</StyledTableCell>
-              <StyledTableCell align='right'>{student.branch}</StyledTableCell>
-              <StyledTableCell align='right'>{student.year}</StyledTableCell>
-              <StyledTableCell align='right'>{student.semester}</StyledTableCell>
-              <StyledTableCell align='right'>{student.section}</StyledTableCell>
-              <StyledTableCell align='right'>{student.noOfStudents}</StyledTableCell>
-              <StyledTableCell align='right'>
-                <Button variant='contained' className='viewButton' onClick={(e) => viewHandler(e, student._id)}>
-                  View
-                </Button>
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-      </TableContainer>}
-      <PlayGroundSpeedDial action={actions}/>
-      {studentsList?.length === 0 || !studentsList ?(
-        <h1 style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
-          No student are added till now</h1>
-      ):null}
-      {deleteComponent && <DeleteConfirm role={role} selectedId={selectedId}/>}
-      </>: <h1 className='"courseDetail' style={{marginTop:"50px"}}>loading...</h1> }
+      {!loading ? 
+        <>
+          {!deleteComponent && 
+            <TableContainer component={Paper}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell>Course</StyledTableCell>
+                    <StyledTableCell align='right'>Branch</StyledTableCell>
+                    <StyledTableCell align='right'>Year&nbsp;(yrs)</StyledTableCell>
+                    <StyledTableCell align='right'>Semester&nbsp;(sem)</StyledTableCell>
+                    <StyledTableCell align='right'>Section&nbsp;(sec)</StyledTableCell>
+                    <StyledTableCell align='right'>No.of.Students&nbsp;(num)</StyledTableCell>
+                    <StyledTableCell align='right'>Action&nbsp;(Ac)</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {groupedData?.map((student) => (
+                    <StyledTableRow key={student?._id || student.course + student.branch + student.year + student.semester + student.section}>
+                      <StyledTableCell component="th" scope='row'>{student?.course}</StyledTableCell>
+                      <StyledTableCell align='right'>{student.branch}</StyledTableCell>
+                      <StyledTableCell align='right'>{student.year}</StyledTableCell>
+                      <StyledTableCell align='right'>{student.semester}</StyledTableCell>
+                      <StyledTableCell align='right'>{student.section}</StyledTableCell>
+                      <StyledTableCell align='right'>{student.noOfStudents}</StyledTableCell>
+                      <StyledTableCell align='right'>
+                        <Button variant='contained' className='viewButton' onClick={(e) => viewHandler(e, student._id)}>
+                          View
+                        </Button>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          }
+          <PlayGroundSpeedDial actions={actions}/>
+          {studentsList?.length === 0 || !studentsList ? (
+            <h1 style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+              No students are added yet
+            </h1>
+          ) : null}
+          {deleteComponent && <DeleteConfirm role={role} selectedId={selectedId}/>}
+        </>
+      : (
+        <h1 className='courseDetail' style={{ marginTop: "50px" }}>Loading...</h1>
+      )}
     </>
   );
 };

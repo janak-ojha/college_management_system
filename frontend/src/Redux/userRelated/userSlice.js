@@ -1,6 +1,7 @@
 
 import { createSlice,  } from "@reduxjs/toolkit";
 
+
 const initialState = {
     status:"idle",
     loading:false,
@@ -69,6 +70,19 @@ const userSlice = createSlice({
             state.error = null;
             state.response = null;
           },
+        getSuccessS:(state,action) =>{
+            state.loading = false;
+            state.studentsList = action.payload;
+            state.error = null;
+            state.response = null;
+        },
+        getSuccessT:(state,action) =>{
+            state.loading = false;
+            state.teachersList = action.payload;
+            state.error = null;
+            state.response = null;
+        }
+          
 
     },
 });
@@ -84,6 +98,8 @@ export const {
     stuffAdded,
     authEmpty,
     getSuccess,
+    getSuccessT,
+    getSuccessS,
 } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;
