@@ -45,7 +45,25 @@ router.post("/singlecoursestudentlist",jwtProject,async(req,res)=>{
         let{course,branch,year,semester,section,collegename} = req.body;
         semester = semester.toString();
         console.log(course,branch,year,semester,section,collegename);
-        if(collegename)
+      
+        if(collegename === null || collegename === undefined){
+            collegename= req.user.id
+        }
+      
+        const query = {
+            $and: [
+                {course: {$regex: course,$options:"i"}},
+                {branch: {$regex: branch,$options:"i"}},
+                {year: {$regex: year,$options:"i"}},
+                {semester: {$regex: semester,$options:"i"}},
+                {section: {$regex: section,$options:"i"}},
+            ],
+            collegename:collegename
+        };
+        let result = await Student.find(query);
+        res.status(200).send(result);
+    }catch(error){
+        res.status(500).send({message:"Internal Server Error"});
     }
 })
 

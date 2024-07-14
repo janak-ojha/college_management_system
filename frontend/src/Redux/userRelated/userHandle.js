@@ -12,6 +12,7 @@ import {
     getSuccess,
     getSuccessS,
     getSuccessT,
+    getSuccessForPerticularCoursesStudent,
 
 } from "./userSlice";
 
@@ -171,6 +172,31 @@ export const deleteOne = (currentUser,role,selectedId) => async(dispatch) =>{
     }catch(error)
     {
         dispatch(authError(error));
+    }
+};
+
+
+export const singleCourseStudentList =(fields,currentUser) => async(dispatch)=>{
+    dispatch(authRequest());
+    try{
+        let result= await fetch(`http://localhost:5000/api/students/singlecoursestudentlist`,
+        {
+            method: "post",
+            body: JSON.stringify(fields),
+            headers:{
+                "Content-Type":"application/json",
+                Authorization:`Bearer ${currentUser?.token}`,
+            }
+        });
+        result = await result.json();
+        console.log(result);
+        if(result[0]){
+            dispatch(getSuccessForPerticularCoursesStudent(result));
+        }else{
+            dispatch(getSuccessForPerticularCoursesStudent(result.message));
+        }
+    }catch(error){
+      dispatch(authError(error));
     }
 };
 

@@ -12,6 +12,7 @@ const initialState = {
     response: null,
     studentsList: [],
     teachersList: [],
+    courseStudentsList: [],
 
     };
 
@@ -60,6 +61,11 @@ const userSlice = createSlice({
             state.deleteComponent = true;
 
         },
+        getSuccessForPerticularCoursesStudent:(state,action) =>{
+            state.loading = false;
+            state.courseStudentsList = action.payload;
+            state.error = null;
+        },
         stuffAdded:(state) =>{
             state.status = "added";
             state.loading = false;
@@ -100,6 +106,7 @@ export const {
     getSuccess,
     getSuccessT,
     getSuccessS,
+    getSuccessForPerticularCoursesStudent,
 } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;
