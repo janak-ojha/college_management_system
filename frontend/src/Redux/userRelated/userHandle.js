@@ -13,6 +13,10 @@ import {
     getSuccessS,
     getSuccessT,
     getSuccessForPerticularCoursesStudent,
+    authSuccessForParticularSubject,
+    authSuccessForParticularSubjectM,
+    authSuccessForStudentA,
+    authSuccessForStudentM
 
 } from "./userSlice";
 
@@ -211,3 +215,26 @@ export const cancelDelete= () =>
 export const setDeletedComponents = () =>(dispatch) =>{
     dispatch(getdeletedcomponent());
 } ; 
+
+//show teacher list
+export const ShowTeacherList = (currentUser) => async(dispatch) =>{
+    dispatch(authRequest());
+    try{
+        let result = await fetch(`http://localhost:5000/api/teachers/getteachers`,{
+            method:"get",
+            headers:{
+                Authorization:`Bearer ${currentUser?.token}`,
+            },
+        });
+        result= await result.json();
+        console.log(result);
+        if(result[0]){
+            dispatch(getSuccessT(result));
+        }else{
+            dispatch(authEmpty());
+        }
+    }catch(error)
+    {
+            dispatch(authError(error));
+    }
+};

@@ -7,7 +7,6 @@ router.get("/getstudents",jwtProject,async(req,res) =>{
     try{
         const result = await Student.find({collegename: req.user.id});
         res.status(200).send(result);    
-
     }catch(err)
     {
         res.status(500).send({message:"internal server error"});
@@ -43,13 +42,15 @@ router.put("/deleteOne",jwtProject,async(req,res) =>{
 router.post("/singlecoursestudentlist",jwtProject,async(req,res)=>{
     try{
         let{course,branch,year,semester,section,collegename} = req.body;
+        // console.log(req.body);
+     
         semester = semester.toString();
-        console.log(course,branch,year,semester,section,collegename);
-      
+    
+        
         if(collegename === null || collegename === undefined){
             collegename= req.user.id
         }
-      
+       
         const query = {
             $and: [
                 {course: {$regex: course,$options:"i"}},

@@ -27,6 +27,7 @@ import AdminProfile from './AdminProfile.js';
 import AdminNotice from './AdminNotice.js';
 import ChooseCourse from './ChooseCourse.js';
 import PerticularCourseStudent from "./PerticularCourseStudent.js";
+import StudentDetails from './StudentDetails.js';
 
 
 
@@ -307,15 +308,17 @@ const AdminDrawer = () => {
           <Route path='/addstudent' element={<AddStudent/>}/>
           <Route path='/addteacher' element={<AddTeacher/>}/>
           <Route path='/showstudent' element={<ShowStudent/>} />
-          <Route path='showteacher' element={<ShowTeacher/>} />
-          <Route path='showcourse' element={<ShowCourses/>} />
-          <Route path='adminhelp' element={<Help/>} />
-          <Route path='adminprofile' element={<AdminProfile/>} />
-          <Route path='adminnotice' element={<AdminNotice/> } />
+          <Route path='/showteacher' element={<ShowTeacher/>} />
+          <Route path='/showcourse' element={<ShowCourses/>} />
+          <Route path='/adminhelp' element={<Help/>} />
+          <Route path='/adminprofile' element={<AdminProfile/>} />
+          <Route path='/adminnotice' element={<AdminNotice/> } />  
           <Route path='/chooseCourse/:role' element={<ChooseCourse/>}></Route>
-          <Route path="/chooseaddteacher/:Id" element={<AddTeacher />} />
-          <Route path="/chooseaddstudent/:Id" element={<AddStudent />} />
-          <Route path="/perticularcoursestudent/:Id" element={<PerticularCourseStudent/>}/>
+          <Route path="/chooseaddteacher/:id" element={<AddTeacher />} />
+          <Route path="/chooseaddstudent/:id" element={<AddStudent />} />
+          <Route path="/perticularcoursestudent/:id" element={<PerticularCourseStudent/>}/>
+          <Route path="/studentdetails/:id" element={<StudentDetails/>}/>
+          
         </Routes>
       </Box>
 

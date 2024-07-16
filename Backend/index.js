@@ -20,11 +20,13 @@ mongoose
 
 const authRoute = require ("./Routes/Auth");
 const course = require("./Routes/Admin/courses");
-const studenta = require("./Routes/Admin/studentad")
+const studenta = require("./Routes/Admin/studentad");
+const teachera = require("./Routes/Admin/teacherad");
 
 app.use("/api/auth",authRoute);
 app.use("/api/courses",course);
 app.use("/api/students",studenta);
+app.use("/api/teachers",teachera);
 
 app.listen(PORT);
 

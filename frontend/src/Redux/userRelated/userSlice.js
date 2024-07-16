@@ -13,6 +13,10 @@ const initialState = {
     studentsList: [],
     teachersList: [],
     courseStudentsList: [],
+    attendanceListForSubject:[],
+    markForSubject:[],
+    attendanceOfStudentList:[],
+    markOfStudent:[],
 
     };
 
@@ -87,6 +91,30 @@ const userSlice = createSlice({
             state.teachersList = action.payload;
             state.error = null;
             state.response = null;
+        },
+        authSuccessForParticularSubject:(state,action) =>{
+            state.loading= false;
+            state.attendanceListForSubject = action.payload;
+            state.error=null;
+            state.response=null;
+        },
+        authSuccessForParticularSubjectM:(state,action) =>{
+            state.loading=false;
+            state.markForSubject=action.payload;
+            state.error=null;
+            state.response = null;
+        },
+        authSuccessForStudentA:(state,action) =>{
+            state.loading=false;
+            state.attendanceOfStudentList = action.payload;
+            state.error=null;
+            state.response = null;
+        },
+        authSuccessForStudentM:(state,action) =>{
+            state.loading=false;
+            state.markOfStudent=action.payload;
+            state.error=null;
+            state.response = null;
         }
           
 
@@ -107,6 +135,10 @@ export const {
     getSuccessT,
     getSuccessS,
     getSuccessForPerticularCoursesStudent,
+    authSuccessForParticularSubject,
+    authSuccessForParticularSubjectM,
+    authSuccessForStudentA,
+    authSuccessForStudentM,
 } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;

@@ -30,8 +30,9 @@ router.post("/addcourse", jwtProject, async (req, res) => {
                 collegename,
             });
 
-            const result = await newCourse.save();
+            const result = await newCourse.save();          
             return res.status(200).json(result);
+            
         }
     } catch (error) {
         return res.status(500).json({ message: "Internal Server Error" });
