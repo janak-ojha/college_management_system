@@ -32,6 +32,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const ShowStudent = () => {
   const { currentUser, studentsList, deleteComponent, loading } = useSelector((state) => state.user);
+  console.log(studentsList);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selectedId, setSelectedId] = useState("");

@@ -8,6 +8,7 @@ import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutlined";
 import SupervisorAccountOutlinedIcon from "@mui/icons-material/SupervisorAccountOutlined";
+import AssignmentIcon from "@mui/icons-material/Assignment";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
@@ -21,7 +22,7 @@ import AddStudent from './AddStudent.js';
 import AddTeacher from './AddTeacher.js';
 import ShowStudent from './ShowStudent.js';
 import ShowTeacher from './ShowTeacher.js';
-import ShowCourses from './ShowCourses.Js';
+import ShowCourse from './ShowCourse.js';
 import Help from './Help.js';
 import AdminProfile from './AdminProfile.js';
 import AdminNotice from './AdminNotice.js';
@@ -241,6 +242,19 @@ const AdminDrawer = () => {
                   </ListItemIcon>
                   <ListItemText primary="Teachers"/>
                 </ListItemButton>
+                <ListItemButton component={Link} to="/showcourse">
+                  <ListItemIcon>
+                    <AssignmentIcon
+                      style={{fontWeight:'bolder', fontSize:"23px"}}
+                      color={
+                        location.pathname.startsWith("/showcourse")
+                          ? "primary"
+                          : "inherit"
+                      }
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary="Courses" />
+                </ListItemButton>
                 <ListItemButton component={Link} to="/adminnotice">
                    <ListItemIcon>
                     <NoteAltIcon
@@ -309,7 +323,7 @@ const AdminDrawer = () => {
           <Route path='/addteacher' element={<AddTeacher/>}/>
           <Route path='/showstudent' element={<ShowStudent/>} />
           <Route path='/showteacher' element={<ShowTeacher/>} />
-          <Route path='/showcourse' element={<ShowCourses/>} />
+          <Route path='/showcourse' element={<ShowCourse/>} />
           <Route path='/adminhelp' element={<Help/>} />
           <Route path='/adminprofile' element={<AdminProfile/>} />
           <Route path='/adminnotice' element={<AdminNotice/> } />  

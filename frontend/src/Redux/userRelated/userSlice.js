@@ -55,6 +55,7 @@ const userSlice = createSlice({
             state.loading= false;
             state.teachersList = action.payload;
             state.studentsList = action.payload; 
+            state.coursesList = action.payload
         },
         getcanceldeletedcomponent: (state) =>{
             state.deleteComponent =false;

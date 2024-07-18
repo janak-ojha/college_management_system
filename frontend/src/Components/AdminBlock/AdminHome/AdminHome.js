@@ -8,7 +8,7 @@ import Teachers from "../../../Assets/Faculty.jpeg";
 import Fees from "../../../Assets/Fees.png";
 import Students from "../../../Assets/Student.jpg";
 import './AdminHome.css';
-import ShowNotice from '../../Toast/ShowNotice';
+import ShowNotices from '../../Toast/ShowNotices';
 const AdminHome = () => {
   return (
     <>
@@ -40,7 +40,7 @@ const AdminHome = () => {
         </Grid>
         <Grid item xs={12} md={12} lg={12}>
           <Paper sx={{p:2 ,display:"flex" ,flexDirection:"column"}}>
-            <ShowNotice/>
+            <ShowNotices/>
           </Paper>
         </Grid>
       </Grid>

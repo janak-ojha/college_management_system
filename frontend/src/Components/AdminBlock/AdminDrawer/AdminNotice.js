@@ -1,8 +1,12 @@
 import React from 'react'
+import Notice from "../../Toast/Notice";
 
 const AdminNotice = () => {
+  let role= "Admin";
   return (
-    <div>AdminNotice</div>
+    <div>
+      <Notice role ={role}/>
+    </div>
   )
 }
 

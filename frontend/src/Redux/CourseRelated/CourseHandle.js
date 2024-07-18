@@ -17,6 +17,7 @@ export const totalCourses = (currentUser) => async(dispatch) =>{
             }
         });
         result= await result.json();
+        console.log(result);
         if(result[0]){
             dispatch(getSuccess(result));
         }else{
@@ -43,6 +44,7 @@ export const deleteOneCourse = (currentUser,role,selectedId) => async(dispatch) 
             },
         });
         result = await result.json();
+
         if(result[0]){
             if(role === "courses"){
                 dispatch(getSuccesC(result));
@@ -51,6 +53,7 @@ export const deleteOneCourse = (currentUser,role,selectedId) => async(dispatch) 
             dispatch(getEmpty());
         }
 }catch(error){
+    dispatch(getError(error));
 
 }
 };

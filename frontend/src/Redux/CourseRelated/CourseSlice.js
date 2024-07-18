@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState={
     courseDetails:[],
-    courseList:[],
+    coursesList:[],
     loading:false,
     error:null,
     response:null
@@ -16,7 +16,7 @@ const courseSlice = createSlice({
             state.loading = true;
         },
         getSuccess:(state,action) =>{
-            state.courseList = action.payload;
+            state.coursesList = action.payload;
             state.loading=false;
             state.response=null;
             state.error = null;
@@ -33,14 +33,14 @@ const courseSlice = createSlice({
         },
         getSuccesC:(state,action)=>{
             state.loading= false;
-            state.courseList=action.payload;
+            state.coursesList=action.payload;
             state.error = null;
             state.response=null;
         },
         getEmpty:(state)=>{
             state.loading=false;
-            state.courseList=[];
-        }
+            state.coursesList=[];
+        },
     }
 })
 

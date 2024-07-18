@@ -107,6 +107,7 @@ export const ShowStudentsList = (currentUser)=> async(dispatch) =>{
         });
        
         result = await result.json();
+        console.log(result);
         if(result[0]){
             dispatch(getSuccess(result))
         }else{
@@ -227,7 +228,7 @@ export const ShowTeacherList = (currentUser) => async(dispatch) =>{
             },
         });
         result= await result.json();
-        console.log(result);
+    
         if(result[0]){
             dispatch(getSuccessT(result));
         }else{
