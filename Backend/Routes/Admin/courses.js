@@ -44,21 +44,24 @@ router.get("/getcourses", jwtProject, async (req, res) => {
     try {
         const result = await Course.find({ collegename: req.user.id });
         return res.status(200).send(result);
+       
     } catch (error) {
         return res.status(500).send({ message: "Internal Server Error" });
     }
 });
 
 // Delete one course
-router.delete("/deleteone", jwtProject, async (req, res) => {
+// deleting one course
+router.put("/deleteOne",jwtProject,async(req,res) => {
     try {
-        const { selectedId } = req.body;
-        await Course.deleteOne({ _id: selectedId });
-        const result = await Course.find({ collegename: req.user.id });
-        return res.status(200).send(result);
-    } catch (error) {
-        return res.status(500).send({ message: "Internal Server Error" });
-    }
-});
+        const requestBody = req.body;
+        await Course.deleteOne({_id:requestBody.selectedId})
+        let result = await Course.find({collegename:req.user.id});
+        res.status(200).send(result);
+      } catch (error) {
+        res.status(500).send({ message: "Internal Server Error" });
+      }
+}) 
+
 
 module.exports = router;

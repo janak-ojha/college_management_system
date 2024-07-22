@@ -2,10 +2,29 @@ import { Button, Container, CssBaseline, TextField, Typography } from '@mui/mate
 import React from 'react'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from "@mui/material/Box"
+import {useDispatch,useSelector} from "react-redux";
 const defaultTheme = createTheme();
 
 const Notice = ({role}) => {
-    const handleSubmit =() =>{};
+    const dispatch = useDispatch();
+    const {currentUser,status,response} = useSelector((state) => state.user);
+
+    const handleSubmit =(event) =>{
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        let notice = data.get("Notice");
+        let collegeid;
+        if(role === "Admin"){
+            collegeid = currentUser?._id;
+        }else if(role === "Teacher"){
+            collegeid = currentUser?.collegeid
+        }else{
+            console.log("Not for student");
+        }
+
+        let fields = {notice , role , collegeid};
+        dispatch(sendNotice(fields,currentUser));
+    };
 
   return (
      <ThemeProvider theme={defaultTheme}>
@@ -40,6 +59,7 @@ const Notice = ({role}) => {
                      variant='contained'
                      sx={{ mt: 3, mb: 2}}
                     >
+                        Send Notice
                     </Button>
                 </Box>
             </Box>

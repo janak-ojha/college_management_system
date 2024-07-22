@@ -7,7 +7,6 @@ const {jwtProject} = require("../../Middleware/authMiddleware");
 router.get("/getteachers",jwtProject,async(req,res) =>{
     try{
         let result = await Teacher.find({collegename:req.user.id});
-        console.log(result);
         result = await Teacher.populate(result,"course");
         res.status(200).send(result);
        

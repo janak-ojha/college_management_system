@@ -22,11 +22,13 @@ const authRoute = require ("./Routes/Auth");
 const course = require("./Routes/Admin/courses");
 const studenta = require("./Routes/Admin/studentad");
 const teachera = require("./Routes/Admin/teacherad");
+const notice = require("./Routes/Notice/notice");
 
 app.use("/api/auth",authRoute);
 app.use("/api/courses",course);
 app.use("/api/students",studenta);
 app.use("/api/teachers",teachera);
+app.use("/api/notice",notice);
 
 app.listen(PORT);
 

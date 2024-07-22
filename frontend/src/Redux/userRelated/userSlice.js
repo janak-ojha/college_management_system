@@ -17,6 +17,7 @@ const initialState = {
     markForSubject:[],
     attendanceOfStudentList:[],
     markOfStudent:[],
+    noticeList:[],
 
     };
 
@@ -116,9 +117,13 @@ const userSlice = createSlice({
             state.markOfStudent=action.payload;
             state.error=null;
             state.response = null;
-        }
-          
-
+        },
+        authSuccessForNotice:(state,action) =>{
+            state.loading = false;
+            state.noticeList = action.payload;
+            state.error = null;
+            state.response = null;
+        },
     },
 });
 
@@ -140,6 +145,7 @@ export const {
     authSuccessForParticularSubjectM,
     authSuccessForStudentA,
     authSuccessForStudentM,
+    authSuccessForNotice,
 } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;

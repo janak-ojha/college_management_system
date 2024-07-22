@@ -7,6 +7,7 @@ import {
     getcanceldeletedcomponent,
     stuffAdded,
     authSuccessGetMessage,
+    authSuccessForNotice,
     getdeletedcomponent,
     authEmpty,
     getSuccess,
@@ -239,3 +240,41 @@ export const ShowTeacherList = (currentUser) => async(dispatch) =>{
             dispatch(authError(error));
     }
 };
+
+export const sendNotice = (fields, currentUser) => async (dispatch) => {
+    dispatch(authRequest());
+    try {
+        let result = await fetch(`http://localhost:5000/api/notice/setnotice`, {
+            method: "POST",
+            body: JSON.stringify(fields),
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${currentUser.token}`,
+            },
+        });
+        result = await result.json();
+        dispatch(stuffAdded());
+    } catch (error) {
+        dispatch(authError(error));
+    }
+};
+
+export const gettingNotice = (collegename,currentUser) => async(dispatch) =>{
+    dispatch(authRequest());
+    try{
+        let result = await fetch(
+            `http://localhost:5000/api/notice/getnotice`,{
+                method:"get",
+                headers:{
+                    Authorization:`Bearer ${currentUser.token}`,
+                },
+            }
+        );
+        result = await result.json();
+        dispatch(authSuccessForNotice(result));
+    }catch(error)
+    {
+        dispatch(authError(error));
+    }
+}
+
