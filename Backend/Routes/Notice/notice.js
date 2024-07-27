@@ -6,11 +6,11 @@ router.post("/setnotice",jwtProject,async(req,res) =>{
     let {collegeid} = req.body;
     try{
         let collegename=collegeid;
-        let notice = new Notice({
+        let noticess = new Notice({
             ...req.body,
             collegename:collegename,
         })
-        let result = await notice.save();
+        let result = await noticess.save();
         res.status(200).json("send successfully")
 
     }

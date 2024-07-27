@@ -28,7 +28,7 @@ app.use("/api/auth",authRoute);
 app.use("/api/courses",course);
 app.use("/api/students",studenta);
 app.use("/api/teachers",teachera);
-app.use("/api/notice",notice);
+app.use("/api/notices",notice);
 
 app.listen(PORT);
 

@@ -3,11 +3,15 @@ import React from 'react'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from "@mui/material/Box"
 import {useDispatch,useSelector} from "react-redux";
+import { cancelDelete,sendNotice } from '../../Redux/userRelated/userHandle';
+import AddedSuccessFully from "../Toast/AddedSuccesfully";
 const defaultTheme = createTheme();
+
 
 const Notice = ({role}) => {
     const dispatch = useDispatch();
     const {currentUser,status,response} = useSelector((state) => state.user);
+    console.log(currentUser);
 
     const handleSubmit =(event) =>{
         event.preventDefault();
@@ -16,6 +20,7 @@ const Notice = ({role}) => {
         let collegeid;
         if(role === "Admin"){
             collegeid = currentUser?._id;
+            console.log(collegeid);
         }else if(role === "Teacher"){
             collegeid = currentUser?.collegeid
         }else{
@@ -23,9 +28,17 @@ const Notice = ({role}) => {
         }
 
         let fields = {notice , role , collegeid};
+        console.log('Fields:', fields); 
         dispatch(sendNotice(fields,currentUser));
     };
-
+    React.useEffect(() =>{
+        if(status === "added"){
+            const timeout = setTimeout(() =>{
+                dispatch(cancelDelete());
+            },1500);
+            return () => clearTimeout(timeout);
+        }
+    } ,[dispatch,status,response]);
   return (
      <ThemeProvider theme={defaultTheme}>
         <Container component="main" maxWidth="md" style={{marginTop:"50px"}}>
@@ -62,6 +75,12 @@ const Notice = ({role}) => {
                         Send Notice
                     </Button>
                 </Box>
+                {status === "added" ? <AddedSuccessFully/>:""}
+                {response === "Course already exist" ? (
+                    <p style={{color:"red"}}>{response}</p>
+                ):(
+                    ""
+                )}
             </Box>
         </Container>
      </ThemeProvider>

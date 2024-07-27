@@ -44,7 +44,7 @@ const ShowCourse = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const role = "courses";
-  console.log(coursesList);
+ 
 
   useEffect(() => {
     dispatch(totalCourses(currentUser));

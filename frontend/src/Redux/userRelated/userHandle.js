@@ -244,15 +244,15 @@ export const ShowTeacherList = (currentUser) => async(dispatch) =>{
 export const sendNotice = (fields, currentUser) => async (dispatch) => {
     dispatch(authRequest());
     try {
-        let result = await fetch(`http://localhost:5000/api/notice/setnotice`, {
-            method: "POST",
+        let result = await fetch(`http://localhost:5000/api/notices/setnotice`, {
+            method: "post",
             body: JSON.stringify(fields),
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${currentUser.token}`,
             },
         });
-        result = await result.json();
+         result = await result.json();
         dispatch(stuffAdded());
     } catch (error) {
         dispatch(authError(error));
