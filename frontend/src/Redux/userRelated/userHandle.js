@@ -259,22 +259,22 @@ export const sendNotice = (fields, currentUser) => async (dispatch) => {
     }
 };
 
-export const gettingNotice = (collegename,currentUser) => async(dispatch) =>{
+export const gettingNotice = (collegename,currentUser) => async(dispatch) => {
     dispatch(authRequest());
-    try{
-        let result = await fetch(
-            `http://localhost:5000/api/notice/getnotice`,{
-                method:"get",
-                headers:{
-                    Authorization:`Bearer ${currentUser.token}`,
-                },
-            }
-        );
-        result = await result.json();
-        dispatch(authSuccessForNotice(result));
-    }catch(error)
-    {
-        dispatch(authError(error));
+    try {
+      let result = await fetch(
+        `http://localhost:5000/api/notices/getnotice/${collegename}`,
+        {
+          method: "get",
+          headers: {
+            Authorization: `Bearer ${currentUser.token}`,
+          },
+        }
+      );
+      result = await result.json();
+      dispatch(authSuccessForNotice(result));
+    } catch (error) {
+      dispatch(authError(error));
     }
-}
-
+  
+  } 
