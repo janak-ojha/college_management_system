@@ -4,13 +4,14 @@ import { useSelector } from "react-redux";
 
 const AdminProfile = () => {
   const {currentUser} = useSelector(state => state.user);
+  console.log(currentUser)
   return (
     <>
     <div className="adminhome" style={{marginTop:'50px'}}>
       <h1>Admin</h1>
       <div>
         <div className="adminImg">
-          <img src={currentUser?.profileDP} alt="img" />
+          <img src={currentUser?.profilepp} alt="img" />
         </div>
         <div className="adminName">{currentUser?.username}</div>
         <div className="adminName">CollgeName: {currentUser?.collegename}</div>

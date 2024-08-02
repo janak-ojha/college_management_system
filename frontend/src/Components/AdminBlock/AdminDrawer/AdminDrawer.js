@@ -13,7 +13,7 @@ import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import {Link,useLocation} from "react-router-dom";
+import {Link,useLocation, useNavigate} from "react-router-dom";
 import { styled, Drawer as MuiDrawer , AppBar as MuiAppBar } from "@mui/material";
 import { Routes,Route } from 'react-router-dom';
 import AdminHome from '../AdminHome/AdminHome';
@@ -29,13 +29,14 @@ import AdminNotice from './AdminNotice.js';
 import ChooseCourse from './ChooseCourse.js';
 import PerticularCourseStudent from "./PerticularCourseStudent.js";
 import StudentDetails from './StudentDetails.js';
-
+import Logout from '../../Forms/Logout.js';
 
 
 
 
 const AdminDrawer = () => {
     const location = useLocation()
+    const Navigate = useNavigate()
     const [open ,setOpen] = useState(false);
     const drawerWidth = 240;
     const toggleDrawer =() =>{
@@ -332,6 +333,8 @@ const AdminDrawer = () => {
           <Route path="/chooseaddstudent/:id" element={<AddStudent />} />
           <Route path="/perticularcoursestudent/:id" element={<PerticularCourseStudent/>}/>
           <Route path="/studentdetails/:id" element={<StudentDetails/>}/>
+          <Route path="/adminlogout" element={<Logout />} />
+          <Route path="*" element={<Navigate to="/adminhome" />} />
           
         </Routes>
       </Box>

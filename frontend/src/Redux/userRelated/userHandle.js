@@ -7,6 +7,7 @@ import {
     getcanceldeletedcomponent,
     stuffAdded,
     authSuccessGetMessage,
+    authLogout,
     authSuccessForNotice,
     getdeletedcomponent,
     authEmpty,
@@ -278,3 +279,9 @@ export const gettingNotice = (collegename,currentUser) => async(dispatch) => {
     }
   
   } 
+
+  //logout 
+
+  export const logoutUser = () => async (dispatch) => {
+    dispatch(authLogout());
+  };

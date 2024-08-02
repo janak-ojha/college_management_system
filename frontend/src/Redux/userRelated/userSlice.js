@@ -124,6 +124,13 @@ const userSlice = createSlice({
             state.error = null;
             state.response = null;
         },
+        authLogout: (state) => {
+            localStorage.removeItem("user");
+            state.status = "idle";
+            state.currentUser = null;
+            state.currentRole = null;
+            state.error = null;
+          },
     },
 });
 
@@ -146,6 +153,7 @@ export const {
     authSuccessForStudentA,
     authSuccessForStudentM,
     authSuccessForNotice,
+    authLogout,
 } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;
