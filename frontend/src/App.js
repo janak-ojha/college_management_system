@@ -13,6 +13,7 @@ function App() {
   return (
     <Router>
       {currentUser?.role === "Admin" && <AdminDrawer />}
+      {currentUser?.role === "Teacher" && <FacultyDrawer />}
 
       {(currentUser === null || currentUser === "") && (
         <>
@@ -21,7 +22,7 @@ function App() {
             <Route path='/home' element={<Homes />} />
             <Route path='/adminlogin' element={<Login role={"Admin"} />} />
             <Route path='/studentlogin' element={<Login role={"Student"} />} />
-            <Route path='/Facultylogin' element={<Login role={"Faculty"} />} />
+            <Route path='/Facultylogin' element={<Login role={"Teacher"} />} />
             <Route path='/registerAdmin' element={<Signup />} />
           </Routes>
         </>
