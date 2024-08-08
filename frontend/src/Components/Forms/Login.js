@@ -74,6 +74,16 @@ const Login = ({ role }) => {
       const fields = { email, password };
       setLoaderGuest(true); // Set the loaderGuest state to true
       dispatch(loginUser(fields, role));
+    }else if(role === "Teacher"){
+      const email = "jk@gmail.com";
+      const fields ={email,password};
+      setLoaderGuest(true);
+      dispatch(loginUser(fields,role));
+    }else if(role === "Student"){
+      const email = "jk@gmail.com";
+      const fields ={email,password};
+      setLoaderGuest(true);
+      dispatch(loginUser(fields,role));
     }
   };
 
@@ -188,7 +198,7 @@ const Login = ({ role }) => {
             backgroundImage: `url(${
               role === "Admin"
                 ? Admins
-                : role === "Faculty"
+                : role === "Teacher"
                   ? Facultys
                   : Students
             })`,

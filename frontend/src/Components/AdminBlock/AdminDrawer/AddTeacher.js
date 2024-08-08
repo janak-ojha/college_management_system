@@ -20,8 +20,8 @@ const AddTeacher = () => {
   const [subject,setSubject] = useState("");
   const dispatch = useDispatch();
   const {currentUser,status,loading,response} = useSelector((state) =>state.user);
-  const {courseList=[]} = useSelector( (state) =>state.course);
-  const role = "Teacher"
+  const {coursesList} = useSelector( (state) =>state.course);
+  const role = "Teacher";
 
   const addTeacherHandler =(e) =>{
     const fields = {
@@ -93,16 +93,16 @@ const AddTeacher = () => {
             onChange={(e)=>{
               setCourseOption(e.target.value)
               const selectedIndex = e.target.selectedIndex -1;
-              const selectedId = courseList[selectedIndex]?._id;
+              const selectedId = coursesList[selectedIndex]?._id;
               setCourse(selectedId);
             }}
             required
             >
             <option value="Select class">Select Course</option>
-            {courseList.map((co,_id) =>(
+            {coursesList.map((co,_id) =>(
               <option
                 key={_id}
-                value={`${co.course},${co?.branch} ,${co.semester},${co.section}`}
+                value={`${co.course},${co?.branch},${co.year} ,${co.semester},${co.section}`}
               >
                 {co.course},{co.branch},{co.year},{co.semester},{" "}
                 {co.section}

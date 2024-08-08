@@ -7,7 +7,7 @@ import AddedSuccessfully from '../../Toast/AddedSuccesfully';
 
 const AddStudent = () => {
   const { currentUser, status, response } = useSelector((state) => state.user);
-  const { courseList = [] } = useSelector((state) => state.course);
+  const { coursesList  } = useSelector((state) => state.course);
   const [username, setUsername] = useState("");  
   const [loader,setLoader] = useState(false);
   const [rollno, setRollno] = useState("");
@@ -20,27 +20,28 @@ const AddStudent = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const role = "Student";
+  console.log(coursesList);
 
 
 
   const uniqueCourses = [
-    ...new Set(courseList.map((co) => co.course.toUpperCase())),
+    ...new Set(coursesList.map((co) => co.course.toUpperCase())),
   ];
 
   const uniqueYears =[
-    ...new Set(courseList.map((yo) => yo.year.toUpperCase())),
+    ...new Set(coursesList.map((yo) => yo.year.toUpperCase())),
   ];
 
   const uniqueBranch = [
-    ...new Set(courseList.map((bran) => bran.branch.toUpperCase())),
+    ...new Set(coursesList.map((bran) => bran.branch.toUpperCase())),
   ];
 
   const uniqueSemester =[
-    ...new Set(courseList.map((sem) => sem.semester.toUpperCase())),
+    ...new Set(coursesList.map((sem) => sem.semester.toUpperCase())),
   ];
 
   const uniqueSection = [
-    ...new Set(courseList.map((sec) => sec.section.toUpperCase())),
+    ...new Set(coursesList.map((sec) => sec.section.toUpperCase())),
   ];
 
   const addStudentHandler = async(e) => {
@@ -67,12 +68,12 @@ const AddStudent = () => {
     }
   }, [dispatch, currentUser]);  
 
-  React.useEffect(() =>{
+  useEffect(() =>{
     if(status === "added" || response === "Roll Number already exist" || response === "Student with this email id exist"){
       const timeout = setTimeout(() => {
         dispatch(cancelDelete())
       }, 1500);
-      return() =>clearTimeout(timeout);
+      return () =>clearTimeout(timeout);
     }
   },[status,response,dispatch]);
 
