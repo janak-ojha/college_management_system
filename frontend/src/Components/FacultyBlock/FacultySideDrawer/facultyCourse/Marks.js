@@ -13,7 +13,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { cancelDelete, takeMark } from "../../../../store/userRelated/userHandle";
-import AddedSucessfull from "../../../toast/AdeddSucessfully"
+import AddedSucessfull from "../../../toast/AdeddSucessfully";
 
 const defaultTheme = createTheme();
 const Mark = () => {
