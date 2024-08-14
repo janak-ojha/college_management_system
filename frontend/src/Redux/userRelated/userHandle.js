@@ -15,8 +15,9 @@ import {
     getSuccessS,
     getSuccessT,
     getSuccessForPerticularCoursesStudent,
-    authSuccessForParticularSubject,
+    authSucessForParticularSubject,
     authSuccessForParticularSubjectM,
+    getSuccessForParticularCourseStudent,
     authSuccessForStudentA,
     authSuccessForStudentM
 
@@ -284,4 +285,52 @@ export const gettingNotice = (collegename,currentUser) => async(dispatch) => {
 
   export const logoutUser = () => async (dispatch) => {
     dispatch(authLogout());
+  };
+
+
+  
+//for teacherblock -->> add attendance
+export const takeAttendance = (fields, currentUser) => async (dispatch) => {
+    dispatch(authRequest());
+    try {
+      let result = await fetch(
+        `http://localhost:5000/api/attendance/takeattendance`,
+        {
+          method: "post",
+          body: JSON.stringify(fields, currentUser),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${currentUser.token}`,
+          },
+        }
+      );
+      result = await result.json();
+      dispatch(authSuccessGetMessage(result.message));
+    } catch (error) {
+      dispatch(authError(error));
+    }
+  };
+  
+  // get all attendance of the particular student for particular teacher
+  
+
+  export const getAttendance = (fields, currentUser) => async (dispatch) => {
+    dispatch(authRequest());
+    try {
+      let result = await fetch(
+        `$http://localhost:5000/api/attendance/getattendance`,
+        {
+          method: "post",
+          body: JSON.stringify(fields, currentUser),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${currentUser.token}`,
+          },
+        }
+      );
+      result = await result.json();
+      dispatch(authSucessForParticularSubject(result));
+    } catch (error) {
+      dispatch(authError(error));
+    }
   };

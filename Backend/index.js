@@ -22,6 +22,11 @@ const authRoute = require ("./Routes/Auth");
 const course = require("./Routes/Admin/courses");
 const studenta = require("./Routes/Admin/studentad");
 const teachera = require("./Routes/Admin/teacherad");
+//for teacherblock
+const attendanceS = require("./Routes/Teacher/Attendance");
+const markS = require("./Routes/Teacher/mark");
+
+//for notice
 const noticea = require("./Routes/Notice/notice");
 
 app.use("/api/auth",authRoute);

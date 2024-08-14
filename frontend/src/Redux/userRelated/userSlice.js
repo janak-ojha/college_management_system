@@ -94,7 +94,7 @@ const userSlice = createSlice({
             state.error = null;
             state.response = null;
         },
-        authSuccessForParticularSubject:(state,action) =>{
+        authSucessForParticularSubject:(state,action) =>{
             state.loading= false;
             state.attendanceListForSubject = action.payload;
             state.error=null;
@@ -148,7 +148,7 @@ export const {
     getSuccessT,
     getSuccessS,
     getSuccessForPerticularCoursesStudent,
-    authSuccessForParticularSubject,
+    authSucessForParticularSubject,
     authSuccessForParticularSubjectM,
     authSuccessForStudentA,
     authSuccessForStudentM,
