@@ -31,6 +31,9 @@ const teacherSchema = new mongoose.Schema({
         ref:"Admin",
         required:true,
     },
+    verifytoken: { //for password resetting process
+        type: String,
+    }
 
 },
 {

@@ -42,6 +42,41 @@ const studentSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    verifytoken: { //for password resetting process
+        type: String,
+    },
+    examResult: [
+        {
+            teacher: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Teacher',
+            },
+            marksObtained: {
+                type: Number,
+                default: 0,
+            },
+            totalMarks: {
+                type: Number,
+                default:100,
+            },
+        }
+    ],
+    attendance: [{
+        date: {
+            type: Date,
+            required: true
+        },
+        status: {
+            type: String,
+            enum: ['Present', 'Absent'],
+            required: true
+        },
+        teacher:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref:"Teacher",
+            required: true
+        },
+    }]
 
 },
 {

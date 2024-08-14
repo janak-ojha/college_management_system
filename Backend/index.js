@@ -34,6 +34,8 @@ app.use("/api/courses",course);
 app.use("/api/students",studenta);
 app.use("/api/teachers",teachera);
 app.use("/api/notices",noticea);
+app.use("/api/attendance",attendanceS);
+app.use("/api/mark",markS);
 
 app.listen(PORT);
 
