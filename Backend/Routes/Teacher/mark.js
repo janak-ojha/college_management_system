@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const Student = require("../../Model/Student");
-const {jwtProtect}  = require("../../Middleware/authMiddleware");
+const {jwtProject}  = require("../../Middleware/authMiddleware");
 
 //to add marks
-router.post("/takemark", jwtProtect, async (req, res) => {
+router.post("/takemark", jwtProject, async (req, res) => {
     const { marksObtained, totalMarks, student } = req.body;
     try {
       let student1 = await Student.findOne({ _id: student });
@@ -40,7 +40,7 @@ router.post("/takemark", jwtProtect, async (req, res) => {
   });
 
   // to get marks of particular subject of particular teacher
-  router.post("/getmark", jwtProtect, async (req, res) => {
+  router.post("/getmark", jwtProject, async (req, res) => {
     const { student } = req.body;
   
     try {

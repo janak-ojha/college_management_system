@@ -16,7 +16,7 @@ import { Button } from "@mui/material";
 import { useParams } from "react-router-dom";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import Piechart from "../../../toast/Piechart";
+import Piechart from "../../../Toast/Piechart";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {

@@ -1,10 +1,10 @@
 const router = require("express").Router();
 const Student = require("../../Model/Student")
-const {jwtProtect} = require("../../Middleware/authMiddleware");
+const {jwtProject} = require("../../Middleware/authMiddleware");
 const Teacher = require("../../Model/Teacher");
 
 // take attendance 
-router.post("/takeAttendance", jwtProtect, async (req, res) => {
+router.post("/takeAttendance",jwtProject, async (req, res) => {
     const { date, status, teacher, student } = req.body;
   
     try {
@@ -41,7 +41,7 @@ router.post("/takeAttendance", jwtProtect, async (req, res) => {
   
 
   // get attendance of particular subject
-router.post("/getAttendance", jwtProtect, async (req, res) => {
+router.post("/getAttendance", jwtProject, async (req, res) => {
   const { teacher, student } = req.body;
 
   try {

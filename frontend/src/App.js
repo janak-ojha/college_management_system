@@ -5,6 +5,7 @@ import Homes from './Components/Home/Homes';
 import Login from './Components/Forms/Login';
 import Signup from './Components/Forms/Signup';
 import AdminDrawer from './Components/AdminBlock/AdminDrawer/AdminDrawer';
+import FacultyDrawer from './Components/FacultyBlock/FacultySideDrawer/FacultyDrawer';
 import { useSelector } from 'react-redux';
 
 function App() {

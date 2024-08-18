@@ -8,7 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useDispatch, useSelector } from "react-redux";
-import { SingleCourseStudentDetail } from "../../../../Redux/userRelated/userHandle";
+import {singleCourseStudentList} from "../../../../Redux/userRelated/userHandle";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
@@ -49,7 +49,7 @@ const FacultyCourse = () => {
   
 
   useEffect(() => {
-    dispatch(SingleCourseStudentDetail(fields,currentUser));
+    dispatch(singleCourseStudentList(fields,currentUser));
   },[])
 
   console.log(courseStudentsList);

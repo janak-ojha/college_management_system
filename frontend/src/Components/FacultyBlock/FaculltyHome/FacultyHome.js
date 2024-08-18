@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Students from "../../../Assets/student12.jpg";
 import { useEffect } from "react";
 import {
-  SingleCourseStudentDetail,
+  singleCourseStudentList,
 } from "../../../Redux/userRelated/userHandle";
 import ShowNotice from "../../Toast/ShowNotices";
 
@@ -34,7 +34,7 @@ const FacultyHome = () => {
   const fields = {course, branch, year, semester, section,collegename};
 
   useEffect(() => {
-    dispatch(SingleCourseStudentDetail(fields,currentUser));
+    dispatch(singleCourseStudentList(fields,currentUser));
   },[])
   
   return (

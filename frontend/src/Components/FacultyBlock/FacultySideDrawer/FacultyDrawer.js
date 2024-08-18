@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
-import Logout from "../../form/Logout";
+import Logout from "../../Forms/Logout";
 import {
   BrowserRouter as Router,
   Routes,
@@ -27,15 +27,15 @@ import {
   Navigate,
 } from "react-router-dom";
 import FacultyProfile from "./FacultyProfile";
-import FacultyHome from "../facultyhome/FacultyHome";
-import FacultyCourse from "./facultycourse/FacultyCourse";
-import Attendance from "./facultycourse/Attendance";
-import ViewAM from "./facultycourse/ViewAM";
+import FacultyHome from "../FaculltyHome/FacultyHome";
+import FacultyCourse from "./facultyCourse/FacultyCourse";
+import Attendance from "./facultyCourse/Attendance";
+import ViewAM from "./facultyCourse/ViewAM";
 import Mark from "./facultycourse/Mark";
 import FacultySideDrawer from "./facultycourse/FacultySideDrawer";
-import FacultyNotice from "./facultycourse/FacultyNotice";
+import FacultyNotice from "./facultyCourse/FacultyNotice";
 
-const AdminDrawer = () => {
+const FacultyDrawer = () => {
   const [open, setOpen] = useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -152,7 +152,7 @@ const AdminDrawer = () => {
   );
 };
 
-export default AdminDrawer;
+export default FacultyDrawer;
 
 const styles = {
   boxStyled: {

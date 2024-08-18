@@ -1,5 +1,5 @@
 import React from 'react'
-import Notice from '../../../toast/Notice'
+import Notice from '../../../Toast/Notice';
 
 const FacultyNotice = () => {
     let role = "Teacher";

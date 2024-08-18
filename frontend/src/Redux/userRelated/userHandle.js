@@ -281,6 +281,50 @@ export const gettingNotice = (collegename,currentUser) => async(dispatch) => {
   
   } 
 
+  // for getting marks of particular subject of particulr teacher
+export const getMark = (fields, currentUser) => async (dispatch) => {
+    dispatch(authRequest());
+    try {
+      let result = await fetch(
+        `${process.env.REACT_APP_BASE_URL_BACKEND}/api/mark/getmark`,
+        {
+          method: "post",
+          body: JSON.stringify(fields, currentUser),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${currentUser.token}`,
+          },
+        }
+      );
+      result = await result.json();
+      dispatch(authSuccessForParticularSubjectM(result));
+    } catch (error) {
+      dispatch(authError(error));
+    }
+  };
+
+  // for addding marks
+export const takeMark = (fields, currentUser) => async (dispatch) => {
+    dispatch(authRequest());
+    try {
+      let result = await fetch(
+        `${process.env.REACT_APP_BASE_URL_BACKEND}/api/mark/takemark`,
+        {
+          method: "post",
+          body: JSON.stringify(fields, currentUser),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${currentUser.token}`,
+          },
+        }
+      );
+      result = await result.json();
+      dispatch(authSuccessGetMessage(result.message));
+    } catch (error) {
+      dispatch(authError(error));
+    }
+  };
+
   //logout 
 
   export const logoutUser = () => async (dispatch) => {
