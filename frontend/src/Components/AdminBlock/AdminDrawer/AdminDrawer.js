@@ -207,7 +207,7 @@ const AdminDrawer = () => {
                 <ListItemButton component={Link} to ="/addteacher">
                 <ListItemIcon>
                   <GroupAddIcon
-                  style={{fontWeight:"bolder",fontSize:"23px"}}
+                  style={{fontWeight:"bolder",fontSize:"23px"}}  
                   color={
                     location.pathname.startsWith("/addteacher")
                     ? "primary"

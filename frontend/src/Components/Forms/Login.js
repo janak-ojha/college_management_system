@@ -35,6 +35,8 @@ const Login = ({ role }) => {
   const { status, response, currentUser, currentRole, error } = useSelector(state => state.user);
 
   useEffect(() => {
+    console.log("Login Status:", status);
+    console.log("Current User Role:", currentRole);
     if (status === "success") {
       setLoader(false);
       setLoaderGuest(false);

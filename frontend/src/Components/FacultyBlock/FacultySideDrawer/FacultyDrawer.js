@@ -31,8 +31,8 @@ import FacultyHome from "../FaculltyHome/FacultyHome";
 import FacultyCourse from "./facultyCourse/FacultyCourse";
 import Attendance from "./facultyCourse/Attendance";
 import ViewAM from "./facultyCourse/ViewAM";
-import Mark from "./facultycourse/Mark";
-import FacultySideDrawer from "./facultycourse/FacultySideDrawer";
+import Mark from "./facultyCourse/Marks";
+import FacultySideDrawer from "./facultyCourse/FacultySideDrawer";
 import FacultyNotice from "./facultyCourse/FacultyNotice";
 
 const FacultyDrawer = () => {

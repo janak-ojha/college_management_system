@@ -15,19 +15,19 @@ function App() {
     <Router>
       {currentUser?.role === "Admin" && <AdminDrawer />}
       {currentUser?.role === "Teacher" && <FacultyDrawer />}
-
-      {(currentUser === null || currentUser === "") && (
+            
+      {(currentUser === null || currentUser === "") && 
         <>
           <Routes>
             <Route path='/' element={<FirstHome />} />
             <Route path='/home' element={<Homes />} />
             <Route path='/adminlogin' element={<Login role={"Admin"} />} />
             <Route path='/studentlogin' element={<Login role={"Student"} />} />
-            <Route path='/Facultylogin' element={<Login role={"Teacher"} />} />
-            <Route path='/registerAdmin' element={<Signup />} />
+            <Route path='/facultylogin' element={<Login role={"Teacher"} />} />
+            <Route path='/registerAdmin' element={<Signup />}/>
           </Routes>
         </>
-      )}
+      }
     </Router>
   );
 }

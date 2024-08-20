@@ -5,7 +5,7 @@ import Paper from "@mui/material/Paper";
 import styled from "styled-components";
 import CountUp from "react-countup";
 import { useDispatch, useSelector } from "react-redux";
-import Students from "../../../Assets/student12.jpg";
+import Students from "../../../Assets/student12.png";
 import { useEffect } from "react";
 import {
   singleCourseStudentList,

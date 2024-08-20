@@ -12,8 +12,8 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { cancelDelete, takeMark } from "../../../../store/userRelated/userHandle";
-import AddedSucessfull from "../../../toast/AdeddSucessfully";
+import { cancelDelete, takeMark } from "../../../../Redux/userRelated/userHandle";
+import AddedSucessfull from "../../../Toast/AddedSuccesfully";
 
 const defaultTheme = createTheme();
 const Mark = () => {

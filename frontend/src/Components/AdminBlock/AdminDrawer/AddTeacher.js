@@ -43,7 +43,7 @@ const AddTeacher = () => {
       const timeout = setTimeout(() => {
         setAddedTeacher(false);
         
-      }, 1500);
+      }, 2000);
       return() => clearTimeout(timeout);
     }else{
       setLoader(false);
