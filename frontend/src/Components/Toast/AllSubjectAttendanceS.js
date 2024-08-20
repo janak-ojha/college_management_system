@@ -11,8 +11,8 @@ import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import Piechart from "../toast/Piechart";
-import Barchart from "../toast/Barchart";
+import Piechart from "../Toast/Piechart";
+import Barchart from "../Toast/Barchart";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {

@@ -25,7 +25,10 @@ const teachera = require("./Routes/Admin/teacherad");
 //for teacherblock
 const attendanceS = require("./Routes/Teacher/Attendance");
 const markS = require("./Routes/Teacher/mark");
-
+//studentblock
+const attendance= require("./Routes/Student/attendancelnS");
+const mark = require("./Routes/Student/marklnS");
+const teacherSubjects = require("./Routes/Student/teacherOfperticularCourse");
 //for notice
 const noticea = require("./Routes/Notice/notice");
 
@@ -36,6 +39,10 @@ app.use("/api/teachers",teachera);
 app.use("/api/notices",noticea);
 app.use("/api/attendance",attendanceS);
 app.use("/api/mark",markS);
+//for student marks
+app.use("/api/attendanceofstudent", attendance);
+app.use("/api/markofstudent", mark);
+app.use("/api/students",teacherSubjects);
 
 app.listen(PORT);
 

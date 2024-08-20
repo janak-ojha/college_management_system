@@ -14,6 +14,7 @@ const initialState = {
     teachersList: [],
     courseStudentsList: [],
     attendanceListForSubject:[],
+    studentTeachers: "",
     markForSubject:[],
     attendanceOfStudentList:[],
     markOfStudent:[],
@@ -118,6 +119,12 @@ const userSlice = createSlice({
             state.error=null;
             state.response = null;
         },
+        authSucessForStudentTeachers: (state, action) => {
+            state.loading= false;
+            state.studentTeachers = action.payload;
+            state.error = null;
+            state.response = null;
+          },
         authSuccessForNotice:(state,action) =>{
             state.loading = false;
             state.noticeList = action.payload;
@@ -150,6 +157,7 @@ export const {
     getSuccessForPerticularCoursesStudent,
     authSucessForParticularSubject,
     authSuccessForParticularSubjectM,
+    authSuccessForStudentTeachers,
     authSuccessForStudentA,
     authSuccessForStudentM,
     authSuccessForNotice,

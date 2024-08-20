@@ -17,7 +17,7 @@ import {
     getSuccessForPerticularCoursesStudent,
     authSucessForParticularSubject,
     authSuccessForParticularSubjectM,
-    getSuccessForParticularCourseStudent,
+    authSuccessForStudentTeachers,
     authSuccessForStudentA,
     authSuccessForStudentM
 
@@ -289,7 +289,7 @@ export const getMark = (fields, currentUser) => async (dispatch) => {
     dispatch(authRequest());
     try {
       let result = await fetch(
-        `${process.env.REACT_APP_BASE_URL_BACKEND}/api/mark/getmark`,
+        `http://localhost:5000/api/mark/getmark`,
         {
           method: "post",
           body: JSON.stringify(fields, currentUser),
@@ -311,7 +311,7 @@ export const takeMark = (fields, currentUser) => async (dispatch) => {
     dispatch(authRequest());
     try {
       let result = await fetch(
-        `${process.env.REACT_APP_BASE_URL_BACKEND}/api/mark/takemark`,
+        `http://localhost:5000//api/mark/takemark`,
         {
           method: "post",
           body: JSON.stringify(fields, currentUser),
@@ -365,7 +365,7 @@ export const takeAttendance = (fields, currentUser) => async (dispatch) => {
     dispatch(authRequest());
     try {
       let result = await fetch(
-        `$http://localhost:5000/api/attendance/getattendance`,
+        `http://localhost:5000/api/attendance/getattendance`,
         {
           method: "post",
           body: JSON.stringify(fields, currentUser),
@@ -381,3 +381,71 @@ export const takeAttendance = (fields, currentUser) => async (dispatch) => {
       dispatch(authError(error));
     }
   };
+  
+// for student block
+
+// getting all attendance of a student
+export const totalAttendanceOfStudent =(currentUser,id) => async(dispatch) => {
+  dispatch(authRequest());
+  try {
+    let result = await fetch(
+      `http://localhost:5000/api/attendanceofstudent/getattendance/${id}`,
+      {
+        method: "get",
+        headers: {
+          Authorization: `Bearer ${currentUser.token}`,
+        },
+      }
+    );
+    result = await result.json();
+    dispatch(authSuccessForStudentA(result));
+  } catch (error) {
+    dispatch(authError(error));
+  }
+
+} 
+
+// getting all mark of a student
+export const totalMarkOfStudent =(currentUser,id) => async(dispatch) => {
+  dispatch(authRequest());
+  try {
+    let result = await fetch(
+      `http://localhost:5000/api/markofstudent/getmark/${id}`,
+      {
+        method: "get",
+        headers: {
+          Authorization: `Bearer ${currentUser.token}`,
+        },
+      }
+    );
+    result = await result.json();
+    dispatch(authSuccessForStudentM(result));
+  } catch (error) {
+    dispatch(authError(error));
+  }
+
+} 
+
+// getting teachers of particular course details
+export const totalTeachersOfStudent = (fields,currentUser) => async(dispatch) => {
+  dispatch(authRequest());
+  try {
+    let result = await fetch(
+      `http://localhost:5000/api/students/getteachers`,
+      {
+        method: "post",
+        body: JSON.stringify(fields),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${currentUser.token}`,
+        },
+      }
+    );
+    result = await result.json();
+    dispatch(authSuccessForStudentTeachers(result));
+  } catch (error) {
+    dispatch(authError(error));
+  }
+
+} 
+
