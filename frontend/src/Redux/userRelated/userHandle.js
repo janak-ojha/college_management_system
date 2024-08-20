@@ -37,8 +37,11 @@ export const registerUser = (fields,currentUser) => async(dispatch) => {
             },
         });
         result = await result.json();
-        console.log("Registration result:", result);
-        if(result.email){
+        if(result.email && result.rollNo){
+          dispatch(stuffAdded());
+        }else if (result?.email && result?.course){
+          dispatch(stuffAdded());
+        }else if(result.email){
             dispatch(authSuccess(result));
         }
         else{

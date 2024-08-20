@@ -121,6 +121,45 @@ router.post("/registerStudent",jwtProject,async(req,res) =>{
     }
 });
 
+// login student
+router.post("/loginStudent", async (req, res) => {
+    try {
+      const { email, password } = req.body;
+      if (req.body.email && req.body.password) {
+        let student = await Student.findOne({ email }).populate("collegename");
+        if (student) {
+          const validated = await bcrypt.compare(password, student.password);
+          if (validated) {
+            res.send({
+              _id: student._id,
+              username: student.username,
+              rollNo: student.rollNo,
+              collegename: student.collegename.collegename,
+              collegeid: student.collegename._id,
+              course: student.course,
+              branch: student.branch,
+              year: student.year,
+              semester: student.semester,
+              section: student.section,
+              email: student.email,
+              role: student.role,
+              profileDP: student?.profileDP,
+              token: TokenGenerate(student._id),
+            });
+          } else {
+            res.send({ message: "Invalid password" });
+          }
+        } else {
+          res.send({ message: "User not found" });
+        }
+      } else {
+        res.send({ message: "email and password are required" });
+      }
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  });
+
 // auth for teacher
 router.post("/registerTeacher",jwtProject,async(req,res) =>{
     try{
@@ -149,4 +188,45 @@ router.post("/registerTeacher",jwtProject,async(req,res) =>{
         res.status(500).json(err);
     }
 });
+
+router.post("/loginTeacher", async (req, res) => {
+    try {
+      const { email, password } = req.body;
+      if (req.body.email && req.body.password) {
+        let teacher = await Teacher.findOne({ email });
+        teacher = await Teacher.populate(teacher, "course");
+        teacher = await Teacher.populate(teacher, "collegename");
+        if (teacher) {
+          const validated = await bcrypt.compare(password, teacher.password);
+          if (validated) {
+            res.send({
+              _id: teacher._id,
+              username: teacher.username,
+              collegename: teacher.collegename.collegename,
+              collegeid: teacher.collegename._id,
+              course: teacher.course.course,
+              branch: teacher.course.branch,
+              year: teacher.course.year,
+              semester: teacher.course.semester,
+              section: teacher.course.section,
+              email: teacher.email,
+              role: teacher.role,
+              subject: teacher.subject,
+              admin: teacher.collegename.username,
+              profileDP: teacher?.profileDP,
+              token: TokenGenerate(teacher._id),
+            });
+          } else {
+            res.send({ message: "Invalid password" });
+          }
+        } else {
+          res.send({ message: "User not found" });
+        }
+      } else {
+        res.send({ message: "email and password are required" });
+      }
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  });
 

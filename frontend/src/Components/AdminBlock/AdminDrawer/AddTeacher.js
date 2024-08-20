@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { totalCourses } from '../../../Redux/CourseRelated/CourseHandle';
 import { cancelDelete, registerUser } from '../../../Redux/userRelated/userHandle';
 import AddedSuccesfulle from "../../Toast/AddedSuccesfully";
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -22,6 +23,7 @@ const AddTeacher = () => {
   const {currentUser,status,loading,response} = useSelector((state) =>state.user);
   const {coursesList} = useSelector( (state) =>state.course);
   const role = "Teacher";
+  const navigate = useNavigate();
 
   const addTeacherHandler =(e) =>{
     const fields = {
@@ -42,6 +44,7 @@ const AddTeacher = () => {
       setLoader(false);
       const timeout = setTimeout(() => {
         setAddedTeacher(false);
+        navigate("/addteacher");
         
       }, 2000);
       return() => clearTimeout(timeout);

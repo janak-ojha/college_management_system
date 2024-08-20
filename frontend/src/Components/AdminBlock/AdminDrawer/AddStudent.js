@@ -4,31 +4,30 @@ import { totalCourses } from '../../../Redux/CourseRelated/CourseHandle';
 import { cancelDelete, registerUser } from '../../../Redux/userRelated/userHandle';
 import "./AddStudent.css";
 import AddedSuccessfully from '../../Toast/AddedSuccesfully';
+import { useNavigate } from 'react-router-dom';
 
 const AddStudent = () => {
   const { currentUser, status, response } = useSelector((state) => state.user);
-  const { coursesList  } = useSelector((state) => state.course);
+  const { coursesList } = useSelector((state) => state.course);
   const [username, setUsername] = useState("");  
-  const [loader,setLoader] = useState(false);
+  const [loader, setLoader] = useState(false);
   const [rollno, setRollno] = useState("");
   const [course, setCourse] = useState("");
   const [branch, setBranch] = useState("");
   const [year, setYear] = useState("");
-  const [ semester,setSemester] =useState("");
+  const [semester, setSemester] = useState("");
   const [section, setSection] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const role = "Student";
-  console.log(coursesList);
-
-
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const uniqueCourses = [
     ...new Set(coursesList.map((co) => co.course.toUpperCase())),
   ];
 
-  const uniqueYears =[
+  const uniqueYears = [
     ...new Set(coursesList.map((yo) => yo.year.toUpperCase())),
   ];
 
@@ -36,7 +35,7 @@ const AddStudent = () => {
     ...new Set(coursesList.map((bran) => bran.branch.toUpperCase())),
   ];
 
-  const uniqueSemester =[
+  const uniqueSemester = [
     ...new Set(coursesList.map((sem) => sem.semester.toUpperCase())),
   ];
 
@@ -56,26 +55,34 @@ const AddStudent = () => {
       section,
       email,
       password,
-
     };
     e.preventDefault();
-    dispatch(registerUser(fields,currentUser));
+    dispatch(registerUser(fields, currentUser));
   };
 
   useEffect(() => {
     if (currentUser) {
       dispatch(totalCourses(currentUser));
     }
-  }, [dispatch, currentUser]);  
+  }, [dispatch, currentUser]);
 
-  useEffect(() =>{
-    if(status === "added" || response === "Roll Number already exist" || response === "Student with this email id exist"){
+  useEffect(() => {
+    if (status === "added") {
       const timeout = setTimeout(() => {
-        dispatch(cancelDelete())
-      }, 1500);
-      return () =>clearTimeout(timeout);
+        navigate("/addstudent"); // Redirect to the students page after successful registration
+      }, 2000); // Wait for 2 seconds before navigating
+      return () => clearTimeout(timeout);
+    }else{
+      setLoader(false);
     }
-  },[status,response,dispatch]);
+    
+    if (response === "Roll Number already exist" || response === "Student with this email id exist") {
+      const timeout = setTimeout(() => {
+        dispatch(cancelDelete());
+      }, 1500);
+      return () => clearTimeout(timeout);
+    }
+  }, [status, response, dispatch, navigate]); // Add navigate to the dependency array
 
   return (
     <div className='addStudent' style={{ marginTop: "65px" }}>
@@ -121,15 +128,15 @@ const AddStudent = () => {
             </select>
           </div>
           <div className='addStudentInput'>
-            <label style={{fontSize:"20px"}}>Branch</label>
+            <label style={{ fontSize:"20px" }}>Branch</label>
             <select
-             className='AsloginInput'
-             value={branch}
-             onChange={(e) => setBranch(e.target.value)}
-             required
+              className='AsloginInput'
+              value={branch}
+              onChange={(e) => setBranch(e.target.value)}
+              required
             >
               <option value="Select Branch">Select Branch</option>
-              {uniqueBranch.map((branch,index) =>(
+              {uniqueBranch.map((branch, index) => (
                 <option key={index} value={branch}>
                   {branch}
                 </option>
@@ -137,15 +144,15 @@ const AddStudent = () => {
             </select>
           </div>
           <div className='addStudentInput'>
-            <label style={{fontSize:"20px"}}>Year</label>
+            <label style={{ fontSize:"20px" }}>Year</label>
             <select
-             className='AsloginInput' 
-             value={year}
-             onChange={(e) => setYear(e.target.value)}
-             required
+              className='AsloginInput'
+              value={year}
+              onChange={(e) => setYear(e.target.value)}
+              required
             >
               <option value="Select Year">Select Year</option>
-              {uniqueYears.map((year,index) =>(
+              {uniqueYears.map((year, index) => (
                 <option key={index} value={year}>
                   {year}
                 </option>
@@ -153,66 +160,66 @@ const AddStudent = () => {
             </select>
           </div>
           <div className='addStudentInput'>
-            <label style={{fontSize:"20px"}}>Semester</label>
+            <label style={{ fontSize:"20px" }}>Semester</label>
             <select
-            className='AsloginInput'
-            value={semester}
-            onChange={(e) => setSemester(e.target.value)}
-            required
+              className='AsloginInput'
+              value={semester}
+              onChange={(e) => setSemester(e.target.value)}
+              required
             >
-             <option>Select Semester</option>
-             {uniqueSemester.map((semester,index)=>(
-              <option key={index} value={semester}>
-                {semester}
-              </option>
-             ))}
+              <option>Select Semester</option>
+              {uniqueSemester.map((semester, index) => (
+                <option key={index} value={semester}>
+                  {semester}
+                </option>
+              ))}
             </select>
           </div>
           <div className='addStudentInput'>
-            <label style={{fontSize:"20px"}}>Section</label>
+            <label style={{ fontSize:"20px" }}>Section</label>
             <select
-            className='AsloginInput'
-            value={section}
-            onChange={(e) => setSection(e.target.value)}
-            required
+              className='AsloginInput'
+              value={section}
+              onChange={(e) => setSection(e.target.value)}
+              required
             >
-             <option>Select Section</option>
-             {uniqueSection.map((section,index) =>(
-              <option key={index} value={section}>
-                {section}
-              </option>
-             ))}
+              <option>Select Section</option>
+              {uniqueSection.map((section, index) => (
+                <option key={index} value={section}>
+                  {section}
+                </option>
+              ))}
             </select>
           </div>
           <div className='addStudentInput'>
-            <label style={{fontSize:"20px"}}>Email</label>
+            <label style={{ fontSize:"20px" }}>Email</label>
             <input
-            className='AsloginInput'
-            value={email}
-            onChange={(e) =>setEmail(e.target.value)}
-            required
-            type='email'
-            placeholder='Enter the email'
+              className='AsloginInput'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              type='email'
+              placeholder='Enter the email'
             />
           </div>
           <div className='AsloginInput'>
-            <label style={{fontSize:"20px"}}>Password</label>
+            <label style={{ fontSize:"20px" }}>Password</label>
             <input
-            className='AsloginInput'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            type='password'
-            placeholder='Enter the email'
-            required
+              className='AsloginInput'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type='password'
+              placeholder='Enter the password'
+              required
             />
           </div>
           <button className='addStudentbutton' type='submit'>
-            {loader? <div className='load'></div>:"Add Student"}
+            {loader ? <div className='load'></div> : "Add Student"}
           </button>
           <div className='courseDetail'>
-            {status === "added"?<AddedSuccessfully/>:""}
-            {(response === "Roll Number already exist"|| response === "Student with this email id exist")?<p style={{color:"red"}}>{response}</p>:""}
-
+            {status === "added" && <AddedSuccessfully />}
+            {(response === "Roll Number already exist" || response === "Student with this email id exist") && 
+              <p style={{color:"red"}}>{response}</p>}
           </div>
         </form>
       </div>

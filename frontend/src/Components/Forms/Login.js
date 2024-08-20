@@ -58,7 +58,7 @@ const Login = ({ role }) => {
         dispatch(cancelDelete());
       }, 5000);
     }
-  }, [status, currentUser, currentRole, navigate, error, response]);
+  }, [status, currentUser, currentRole, navigate, error, response,dispatch,updateRole]);
 
   const fields = { email, password };
 
