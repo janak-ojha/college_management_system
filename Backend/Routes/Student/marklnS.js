@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Student = require("../../models/Student")
+const Student = require("../../Model/Student")
 const {jwtProject} = require("../../Middleware/authMiddleware");
 
 router.get("/getmark/:id", jwtProject, async (req, res) => {  

@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Teacher = require("../../models/Teacher");
+const Teacher = require("../../Model/Teacher");
 const { jwtProject } = require("../../Middleware/authMiddleware");
 
 router.post("/getteachers", jwtProject, async (req, res) => {

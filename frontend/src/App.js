@@ -6,6 +6,7 @@ import Login from './Components/Forms/Login';
 import Signup from './Components/Forms/Signup';
 import AdminDrawer from './Components/AdminBlock/AdminDrawer/AdminDrawer';
 import FacultyDrawer from './Components/FacultyBlock/FacultySideDrawer/FacultyDrawer';
+import StudentSideDrawer from "./Components/studentBlock/studentsideDrawer/StudentSideDrawer";
 import { useSelector } from 'react-redux';
 import Error from './Components/Toast/Error';
 
@@ -16,6 +17,7 @@ function App() {
     <Router>
       {currentUser?.role === "Admin" && <AdminDrawer />}
       {currentUser?.role === "Teacher" && <FacultyDrawer />}
+      {currentUser?.role === "Student" && <StudentSideDrawer />}
 
       {(currentUser === null || currentUser === "") && 
         <>

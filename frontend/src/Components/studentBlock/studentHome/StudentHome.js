@@ -4,7 +4,7 @@ import Paper from "@mui/material/Paper";
 import styled from "styled-components";
 import CountUp from "react-countup";
 import { useDispatch, useSelector } from "react-redux";
-import Students from "../../../assets/students.png";
+import Students from "../../../Assets/Student.jpg";
 import { useEffect } from "react";
 import {
   totalAttendanceOfStudent,
