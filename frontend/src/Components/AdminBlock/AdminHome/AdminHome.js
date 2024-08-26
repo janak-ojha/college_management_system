@@ -7,7 +7,7 @@ import Classes_img from "../../../Assets/classes_img.jpg";
 import Teachers from "../../../Assets/Faculty.jpeg";
 import Fees from "../../../Assets/Fees.png";
 import Students from "../../../Assets/Student.jpg";
-import './adminhome.css';
+import './AdminHome.css';
 import ShowNotices from '../../Toast/ShowNotices';
 const AdminHome = () => {
   return (
