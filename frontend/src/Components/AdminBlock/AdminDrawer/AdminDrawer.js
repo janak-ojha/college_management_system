@@ -17,7 +17,7 @@ import {Link,useLocation, useNavigate} from "react-router-dom";
 import { styled, Drawer as MuiDrawer , AppBar as MuiAppBar } from "@mui/material";
 import { Routes,Route } from 'react-router-dom';
 import AdminHome from '../AdminHome/AdminHome.js';
-import '../AdminHome/adminhome.css'
+import '../AdminHome/AdminHome.css'
 import AddCourse from './AddCourse.js';
 import AddStudent from './AddStudent.js';
 import AddTeacher from './AddTeacher.js';
