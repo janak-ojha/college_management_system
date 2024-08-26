@@ -43,7 +43,7 @@ const FacultyHome = () => {
       <Grid container spacing={3}>
         <Grid item xs={12} md={3} lg={3}>
           <StyledPaper>
-            <Image src={Students} alt="Students" />
+            <Image src={Students} alt="Students"/>
             <Title>Total Students</Title>
             <Data start={0} end={courseStudentsList?.length} duration={1.5} />
           </StyledPaper>

@@ -318,7 +318,7 @@ const AdminDrawer = () => {
       <Box component="main" sx={styles.boxStyled}>
         <Toolbar/>
         <Routes>
-          <Route path='/adminHome' element={<AdminHome/>}/>
+          <Route path='/adminhome' element={<AdminHome/>}/>
           <Route path='/addcourse' element={<AddCourse/>}/>
           <Route path='/addstudent' element={<AddStudent/>}/>
           <Route path='/addteacher' element={<AddTeacher/>}/>
@@ -335,7 +335,6 @@ const AdminDrawer = () => {
           <Route path="/studentdetails/:id" element={<StudentDetails/>}/>
           <Route path="/adminlogout" element={<Logout />} />
           <Route path="*" element={<Navigate to="/adminhome" />} />
-          
         </Routes>
       </Box>
 
