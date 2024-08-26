@@ -258,7 +258,7 @@ export const sendNotice = (fields, currentUser) => async (dispatch) => {
             },
         });
          result = await result.json();
-        dispatch(stuffAdded());
+        dispatch(stuffAdded(result));
     } catch (error) {
         dispatch(authError(error));
     }
