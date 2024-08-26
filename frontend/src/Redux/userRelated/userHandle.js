@@ -28,7 +28,7 @@ export const registerUser = (fields,currentUser) => async(dispatch) => {
     dispatch(authRequest());
     try{ 
         console.log("Registering user with fields:", fields);
-        let result = await fetch(`http://localhost:5000/api/auth/register${role}`,{
+        let result = await fetch(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/auth/register${role}`,{
             method: "post",
             body: JSON.stringify(fields),
             headers:{
@@ -57,7 +57,7 @@ export const loginUser = (fields,role) =>async(dispatch) => {
     const {email,password} = fields;
     dispatch(authRequest());
     try{
-        let result = await fetch(`http://localhost:5000/api/auth/login${role}`,{
+        let result = await fetch(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/auth/login${role}`,{
         method: "post",
         body: JSON.stringify(fields),
         headers:{
@@ -82,7 +82,7 @@ export const addCourse = (fields, currentUser) => async (dispatch) => {
     dispatch(authRequest());
     console.log(fields, currentUser);
     try {
-        let result = await fetch(`http://localhost:5000/api/courses/addcourse`, {
+        let result = await fetch(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/courses/addcourse`, {
             method: "post",
             body: JSON.stringify(fields),
             headers: {
@@ -105,7 +105,7 @@ export const addCourse = (fields, currentUser) => async (dispatch) => {
 export const ShowStudentsList = (currentUser)=> async(dispatch) =>{
   dispatch(authRequest());
   try{
-        let result = await fetch(`http://localhost:5000/api/students/getstudents`,{
+        let result = await fetch(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/students/getstudents`,{
             method:'get',
             headers:{
                 Authorization: `Bearer ${currentUser?.token}`,
@@ -131,7 +131,7 @@ export const ShowStudentsList = (currentUser)=> async(dispatch) =>{
 export const deleteAll = (currentUser,role) => async(dispatch) =>{
     dispatch(authRequest());
     try{
-        let result = await fetch(`http://localhost:5000/api/${role}/deleteAll`,{
+        let result = await fetch(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/${role}/deleteAll`,{
             method:"put",
             headers:{
                 Authorization: `Bearer ${currentUser?.token}`,
@@ -161,7 +161,7 @@ export const deleteOne = (currentUser,role,selectedId) => async(dispatch) =>{
     dispatch(authRequest());
     try{
         const requestBody = {selectedId};
-        let result = await fetch(`http://localhost:5000/api/${role}/deleteOne`,{
+        let result = await fetch(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/${role}/deleteOne`,{
             method:"put",
             body:JSON.stringify(requestBody),
             headers:{
@@ -190,7 +190,7 @@ export const deleteOne = (currentUser,role,selectedId) => async(dispatch) =>{
 export const singleCourseStudentList =(fields,currentUser) => async(dispatch)=>{
     dispatch(authRequest());
     try{
-        let result= await fetch(`http://localhost:5000/api/students/singlecoursestudentlist`,
+        let result= await fetch(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/students/singlecoursestudentlist`,
         {
             method: "post",
             body: JSON.stringify(fields),
@@ -227,7 +227,7 @@ export const setDeletedComponents = () =>(dispatch) =>{
 export const ShowTeacherList = (currentUser) => async(dispatch) =>{
     dispatch(authRequest());
     try{
-        let result = await fetch(`http://localhost:5000/api/teachers/getteachers`,{
+        let result = await fetch(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/teachers/getteachers`,{
             method:"get",
             headers:{
                 Authorization:`Bearer ${currentUser?.token}`,
@@ -249,7 +249,7 @@ export const ShowTeacherList = (currentUser) => async(dispatch) =>{
 export const sendNotice = (fields, currentUser) => async (dispatch) => {
     dispatch(authRequest());
     try {
-        let result = await fetch(`http://localhost:5000/api/notices/setnotice`, {
+        let result = await fetch(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/notices/setnotice`, {
             method: "post",
             body: JSON.stringify(fields),
             headers: {
@@ -268,7 +268,7 @@ export const gettingNotice = (collegename,currentUser) => async(dispatch) => {
     dispatch(authRequest());
     try {
       let result = await fetch(
-        `http://localhost:5000/api/notices/getnotice/${collegename}`,
+        `${process.env.REACT_APP_BASE_URL_BACKEND}/api/notices/getnotice/${collegename}`,
         {
           method: "get",
           headers: {
@@ -289,7 +289,7 @@ export const getMark = (fields, currentUser) => async (dispatch) => {
     dispatch(authRequest());
     try {
       let result = await fetch(
-        `http://localhost:5000/api/mark/getmark`,
+        `${process.env.REACT_APP_BASE_URL_BACKEND}/api/mark/getmark`,
         {
           method: "post",
           body: JSON.stringify(fields, currentUser),
@@ -311,7 +311,7 @@ export const takeMark = (fields, currentUser) => async (dispatch) => {
     dispatch(authRequest());
     try {
       let result = await fetch(
-        `http://localhost:5000//api/mark/takemark`,
+        `${process.env.REACT_APP_BASE_URL_BACKEND}/api/mark/takemark`,
         {
           method: "post",
           body: JSON.stringify(fields, currentUser),
@@ -341,7 +341,7 @@ export const takeAttendance = (fields, currentUser) => async (dispatch) => {
     dispatch(authRequest());
     try {
       let result = await fetch(
-        `http://localhost:5000/api/attendance/takeattendance`,
+        `${process.env.REACT_APP_BASE_URL_BACKEND}/api/attendance/takeattendance`,
         {
           method: "post",
           body: JSON.stringify(fields, currentUser),
@@ -365,7 +365,7 @@ export const takeAttendance = (fields, currentUser) => async (dispatch) => {
     dispatch(authRequest());
     try {
       let result = await fetch(
-        `http://localhost:5000/api/attendance/getattendance`,
+        `${process.env.REACT_APP_BASE_URL_BACKEND}/api/attendance/getattendance`,
         {
           method: "post",
           body: JSON.stringify(fields, currentUser),
@@ -389,7 +389,7 @@ export const totalAttendanceOfStudent =(currentUser,id) => async(dispatch) => {
   dispatch(authRequest());
   try {
     let result = await fetch(
-      `http://localhost:5000/api/attendanceofstudent/getattendance/${id}`,
+      `${process.env.REACT_APP_BASE_URL_BACKEND}/api/attendanceofstudent/getattendance/${id}`,
       {
         method: "get",
         headers: {
@@ -410,7 +410,7 @@ export const totalMarkOfStudent =(currentUser,id) => async(dispatch) => {
   dispatch(authRequest());
   try {
     let result = await fetch(
-      `http://localhost:5000/api/markofstudent/getmark/${id}`,
+      `${process.env.REACT_APP_BASE_URL_BACKEND}/api/markofstudent/getmark/${id}`,
       {
         method: "get",
         headers: {
@@ -431,7 +431,7 @@ export const totalTeachersOfStudent = (fields,currentUser) => async(dispatch) =>
   dispatch(authRequest());
   try {
     let result = await fetch(
-      `http://localhost:5000/api/students/getteachers`,
+      `${process.env.REACT_APP_BASE_URL_BACKEND}/api/students/getteachers`,
       {
         method: "post",
         body: JSON.stringify(fields),

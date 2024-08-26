@@ -10,7 +10,7 @@ import {
 export const totalCourses = (currentUser) => async(dispatch) =>{
     dispatch(getRequest());
     try{
-        let result= await fetch(`http://localhost:5000/api/courses/getcourses`,{
+        let result= await fetch(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/courses/getcourses`,{
             method:'get',
             headers:{
                 Authorization:`Bearer ${currentUser?.token}`,
@@ -35,7 +35,7 @@ export const deleteOneCourse = (currentUser,role,selectedId) => async(dispatch) 
     dispatch(getRequest());
     try{
         const requestBody = {selectedId};
-        let result = await fetch(`http://localhost:5000/api/${role}/deleteOne`,{
+        let result = await fetch(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/${role}/deleteOne`,{
             method: "put",
             body: JSON.stringify(requestBody),
             headers:{
