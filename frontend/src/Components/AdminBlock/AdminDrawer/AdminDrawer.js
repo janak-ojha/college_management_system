@@ -32,8 +32,6 @@ import StudentDetails from './StudentDetails.js';
 import Logout from '../../Forms/Logout.js';
 
 
-
-
 const AdminDrawer = () => {
     const location = useLocation()
     const Navigate = useNavigate()
