@@ -107,7 +107,7 @@ const Login = ({ role }) => {
             <Typography variant='h7'>
               Welcome back! Please enter your details.
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 2 }}>
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 2,}}>
               <TextField
                 margin="normal"
                 required

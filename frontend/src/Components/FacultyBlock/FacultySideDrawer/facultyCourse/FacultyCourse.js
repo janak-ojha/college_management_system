@@ -99,7 +99,7 @@ const FacultyCourse = () => {
             {student.username}
           </StyledTableCell>
           <StyledTableCell align="right" style={{textAlign:"center"}}>
-            {student.rollNo}
+            {student.rollno}
           </StyledTableCell>
           <StyledTableCell align="right" style={{textAlign:"center",display:"flex",flexDirection:"row"}}>
           <Button variant="contained" style={{marginRight:"5px"}} className="" onClick={(e) => viewHandler(student._id,student.username)}>
